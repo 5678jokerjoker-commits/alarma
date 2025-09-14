@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Идеальные ногти от Вики</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome для иконок -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Собственный стиль -->
+  <style>
+    :root {
+      --primary: #f8c4b3;
+      --secondary: #e6b9a5;
+      --dark: #3a2c28;
+      --light: #fdf7f3;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+      background-image: url('image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZmRmN2YzIi8+PHBhdGggZD0iTSAwIDAgTCA1MCA1MCIgc3Ryb2tlPSIjZWFkOWFjIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=');
+      background-repeat: repeat;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://sun9-62.userapi.com/s/v1/ig2/euGQEVf9vMzwOeAEK6YiH0hkuCLVrfc0Y2Wbkj6hJ6koQ92ISv0GxKtTz7SJohB7T6mprbt8mAopspaZKCiHntCZ.jpg?quality=95&as=32x65,48x98,72x147,108x221,160x327,240x491,360x737,480x982,540x1105,640x1309,652x1334&from=bu&cs=652x0');
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZGVmcz48cGF0dGVybiBpZD0icGF0dGVybiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cmVjdCB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNIDEwIDAgTCAyMCAxMCBMIDEwIDIwIFoiIGZpbGw9IiNmOGM0YjMiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+      opacity: 0.1;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      font-weight: 300;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      padding: 12px 30px;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--secondary);
+      border-color: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Gallery */
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      height: 280px;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 2rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 3rem 0;
+    }
+
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--primary);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    /* Карусель */
+    .carousel-caption {
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      padding: 15px;
+      max-width: 70%;
+    }
+
+    .carousel-caption h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .carousel-caption p {
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+
+    /* Services */
+    .service-card {
+      transition: all 0.3s ease;
+      border: none;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      background-color: rgba(255,255,255,0.8);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .service-card i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .service-card h5 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .service-card strong {
+      color: var(--dark);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /* Form */
+    .form-section {
+      background-color: rgba(248, 240, 236, 0.8);
+      padding: 4rem 0;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      padding: 12px 15px;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.2rem rgba(248, 196, 179, 0.25);
+    }
+
+    .btn-lg {
+      padding: 14px 40px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.2rem; }
+      .carousel-caption { max-width: 90%; }
+      .gallery-item img { height: 220px; }
+      .section-title { font-size: 2rem; }
+      .service-card { padding: 1.5rem; }
+      .btn-primary { font-size: 1rem; }
+    }
+
+    @media (max-width: 576px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 1.8rem; }
+      .carousel-indicators { bottom: -30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Темная тема — кнопка -->
+  <button class="dark-mode-toggle" id="darkModeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Hero Section -->
+  <section class="hero text-center">
+    <div class="container">
+      <h1 class="display-4 mb-4">Идеальные ногти от Вики</h1>
+      <p class="lead mb-4">Искусство маникюра, которое говорит само за себя</p>
+      <a href="#gallery" class="btn btn-primary btn-lg">Посмотреть работы</a>
+    </div>
+  </section>
+
+  <!-- Карусель с 6 вашими фото -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center section-title mb-5">Тренды этого месяца</h2>
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        </div>
+        <div class="carousel-inner">
+          <!-- Слайд 1 -->
+          <div class="carousel-item active">
+            <img src="https://sun9-87.userapi.com/s/v1/ig2/3j2_LrSkfw-l56i_7OaV02EgFdycydp6Q8Cr3oUIAc3nQLTJ0ik-nIvqaBQmgG07NZ8e3UKlQco0JfaKjZyOkuKn.jpg?quality=96&as=32x65,48x98,72x147,108x220,160x327,240x490,294x600&from=bu&cs=294x0" class="d-block w-100" alt="Маникюр 1 — натуральный френч">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Натуральный френч</h3>
+              <p>Элегантный белый кончик на бежевом фоне — классика без компромиссов</p>
+            </div>
+          </div>
+          <!-- Слайд 2 -->
+          <div class="carousel-item">
+            <img src="https://sun9-30.userapi.com/s/v1/ig2/QPR0OhtH_b0rGIWF00sYfyw7O4k_QmLZY1_QrU0X_Zq7-fN86W9QcESEVyUgxkbfbxlTDehVc4yxiCqgXfJltABm.jpg?quality=96&as=32x66,48x98,72x147,108x221,160x328,240x491,293x600&from=bu&cs=293x0" class="d-block w-100" alt="Маникюр 2 — минимализм с блеском">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Минимализм с блеском</h3>
+              <p>Тонкие золотые линии — деликатный акцент для повседневного образа</p>
+            </div>
+          </div>
+          <!-- Слайд 3 -->
+          <div class="carousel-item">
+            <img src="https://sun9-62.userapi.com/s/v1/ig2/euGQEVf9vMzwOeAEK6YiH0hkuCLVrfc0Y2Wbkj6hJ6koQ92ISv0GxKtTz7SJohB7T6mprbt8mAopspaZKCiHntCZ.jpg?quality=95&as=32x65,48x98,72x147,108x221,160x327,240x491,360x737,480x982,540x1105,640x1309,652x1334&from=bu&cs=652x0" class="d-block w-100" alt="Маникюр 3 — цветочные узоры">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Цветочные узоры</h3>
+              <p>Розовые лепестки на персиковом фоне — нежность и женственность</p>
+            </div>
+          </div>
+          <!-- Слайд 4 -->
+          <div class="carousel-item">
+            <img src="https://sun9-84.userapi.com/s/v1/ig2/KMLoCfMWePfJXFedDg_ZHPrIpfjhd2qwDm4Vn5yKQZ0yJ0qYuSx3wTBpj9ehVFCZKMIb8Rh-FQWjOMgAheGvoMz5.jpg?quality=96&as=32x48,48x72,72x108,108x162,160x239,240x359,360x539,401x600&from=bu&cs=401x0" class="d-block w-100" alt="Маникюр 4 — глиттер и роспись">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Глиттер и роспись</h3>
+              <p>Блестящие капли и тонкая кисть — искусство на кончиках пальцев</p>
+            </div>
+          </div>
+          <!-- Слайд 5 -->
+          <div class="carousel-item">
+            <img src="https://sun9-75.userapi.com/s/v1/if1/1ExNvPnJz20EFXjb9fsFNxN8-qDQHZ_MjzxNijul0Vu0gWtvlEsGANBeHyMDftLs5dBcRwVy.jpg?quality=96&as=32x31,48x46,72x70,108x105,160x155,240x232,360x349,480x465,537x520&from=bu&cs=537x0" class="d-block w-100" alt="Маникюр 5 — матовый персик">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Матовый персик</h3>
+              <p>Современный матовый оттенок — идеал для делового стиля</p>
+            </div>
+          </div>
+          <!-- Слайд 6 -->
+          <div class="carousel-item">
+            <img src="https://sun9-87.userapi.com/s/v1/ig2/6HAKNjgkzhvye27jvgNKlbIVcr7h-8-oEybp-NHCY_Zyv062PdEEK5Ur9IBdwuT6eS_go4UVyC8WsSteST_N23N4.jpg?quality=96&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,500x500&from=bu&cs=500x0" class="d-block w-100" alt="Маникюр 6 — золотой контур">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Золотой контур</h3>
+              <p>Тонкий золотой обвод — эффект «драгоценных камней» на ногтях</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Галерея работ — все 6 фото -->
+  <section id="gallery" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title mb-5">Наши работы</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="gallery-item">
+            <img src="https://sun9-87.userapi.com/s/v1/ig2/3j2_LrSkfw-l56i_7OaV02EgFdycydp6Q8Cr3oUIAc3nQLTJ0ik-nIvqaBQmgG07NZ8e3UKlQco0JfaKjZyOkuKn.jpg?quality=96&as=32x65,48x98,72x147,108x220,160x327,240x490,294x600&from=bu&cs=294x0" alt="Работа 1 — натуральный френч">
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gallery-item">
+            <img src="https://sun9-30.userapi.com/s/v1/ig2/QPR0OhtH_b0rGIWF00sYfyw7O4k_QmLZY1_QrU0X_Zq7-fN86W9QcESEVyUgxkbfbxlTDehVc4yxiCqgXfJltABm.jpg?quality=96&as=32x66,48x98,72x147,108x221,160x328,240x491,293x600&from=bu&cs=293x0" alt="Работа 2 — минимализм с блеском">
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gallery-item">
+            <img src="https://sun9-62.userapi.com/s/v1/ig2/euGQEVf9vMzwOeAEK6YiH0hkuCLVrfc0Y2Wbkj6hJ6koQ92ISv0GxKtTz7SJohB7T6mprbt8mAopspaZKCiHntCZ.jpg?quality=95&as=32x65,48x98,72x147,108x221,160x327,240x491,360x737,480x982,540x1105,640x1309,652x1334&from=bu&cs=652x0" alt="Работа 3 — цветочные узоры">
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gallery-item">
+            <img src="https://sun9-84.userapi.com/s/v1/ig2/KMLoCfMWePfJXFedDg_ZHPrIpfjhd2qwDm4Vn5yKQZ0yJ0qYuSx3wTBpj9ehVFCZKMIb8Rh-FQWjOMgAheGvoMz5.jpg?quality=96&as=32x48,48x72,72x108,108x162,160x239,240x359,360x539,401x600&from=bu&cs=401x0" alt="Работа 4 — глиттер и роспись">
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gallery-item">
+            <img src="https://sun9-75.userapi.com/s/v1/if1/1ExNvPnJz20EFXjb9fsFNxN8-qDQHZ_MjzxNijul0Vu0gWtvlEsGANBeHyMDftLs5dBcRwVy.jpg?quality=96&as=32x31,48x46,72x70,108x105,160x155,240x232,360x349,480x465,537x520&from=bu&cs=537x0" alt="Работа 5 — матовый персик">
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="gallery-item">
+            <img src="https://sun9-87.userapi.com/s/v1/ig2/6HAKNjgkzhvye27jvgNKlbIVcr7h-8-oEybp-NHCY_Zyv062PdEEK5Ur9IBdwuT6eS_go4UVyC8WsSteST_N23N4.jpg?quality=96&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,500x500&from=bu&cs=500x0" alt="Работа 6 — золотой контур">
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <a href="#" class="btn btn-outline-dark btn-lg">Увидеть больше →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Услуги -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center section-title mb-5">Наши услуги</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="service-card">
+            <i class="fas fa-paint-brush"></i>
+            <h5>Классический маникюр</h5>
+            <p>Очистка, форма, лак. Идеально для ежедневного ношения.</p>
+            <strong>800₽</strong>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service-card">
+            <i class="fas fa-sparkles"></i>
+            <h5>Дизайн с блёстками</h5>
+            <p>Персик, золото, глиттер — ваш образ станет ярче.</p>
+            <strong>1800₽</strong>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service-card">
+            <i class="fas fa-hammer"></i>
+            <h5>Укрепление гелем</h5>
+            <p>Прочность + красота. Подходит для хрупких ногтей.</p>
+            <strong>2200₽</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Форма записи -->
+  <section class="form-section">
+    <div class="container">
+      <h2 class="text-center section-title mb-5">Забронируйте запись</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Ваше имя" required>
+              </div>
+              <div class="col-md-6">
+                <input type="tel" class="form-control" placeholder="+7 (___) ___-__-__" required>
+              </div>
+              <div class="col-md-6">
+                <input type="date" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" required>
+                  <option value="">Выберите услугу</option>
+                  <option>Классический маникюр</option>
+                  <option>Дизайн с блёстками</option>
+                  <option>Укрепление гелем</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <textarea class="form-control" rows="3" placeholder="Желаемый цвет или идея (опционально)"></textarea>
+              </div>
+              <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Забронировать</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Идеальные ногти от Вики</h5>
+          <p>Создаю маникюр, который подчеркнёт твою индивидуальность. Только качественные материалы и бережный подход.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Контакты</h5>
+          <ul class="list-unstyled footer-links">
+            <li><i class="fas fa-map-marker-alt me-2"></i> г. Москва, ул. Цветочная, д. 12</li>
+            <li><i class="fas fa-phone me-2"></i> +7 (495) 123-45-67</li>
+            <li><i class="fas fa-envelope me-2"></i> info@perfectnails-vika.ru</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Следите за нами</h5>
+          <div class="social-icons">
+            <a href="#" class="me-3"><i class="fab fa-instagram fa-2x" style="color: #e4405f;"></i></a>
+            <a href="#" class="me-3"><i class="fab fa-vk fa-2x" style="color: #45668e;"></i></a>
+            <a href="#"><i class="fab fa-telegram fa-2x" style="color: #0088cc;"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4 bg-light">
+      <p class="text-center text-muted">&copy; 2025 Идеальные ногти от Вики. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Dark Mode Script -->
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    toggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const icon = toggle.querySelector('i');
+      if (body.classList.contains('dark-mode')) {
+        body.style.background = '#1a1a1a';
+        body.style.color = '#eee';
+        icon.className = 'fas fa-sun';
+      } else {
+        body.style.background = '#fdf7f3';
+        body.style.color = '#3a2c28';
+        icon.className = 'fas fa-moon';
+      }
+    });
+  </script>
+
+</body>
+</html>
