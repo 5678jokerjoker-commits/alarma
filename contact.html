@@ -8,6 +8,75 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <section style="padding: 60px 20px; text-align: center;">
+  <h2>Свяжитесь со мной</h2>
+
+  <form id="contact-form" style="max-width: 500px; margin: 30px auto; text-align: left;">
+    <div style="margin-bottom: 16px;">
+      <input
+        type="text"
+        id="name"
+        placeholder="Ваше имя"
+        required
+        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px;"
+      >
+    </div>
+    <div style="margin-bottom: 16px;">
+      <input
+        type="email"
+        id="email"
+        placeholder="Ваш email"
+        required
+        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px;"
+      >
+    </div>
+    <div style="margin-bottom: 16px;">
+      <textarea
+        id="message"
+        placeholder="Сообщение"
+        required
+        rows="5"
+        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; resize: vertical;"
+      ></textarea>
+    </div>
+    <button
+      type="submit"
+      style="width: 100%; padding: 14px; background: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;"
+    >
+      Отправить
+    </button>
+    <p id="form-status" style="margin-top: 12px; text-align: center; font-weight: bold;"></p>
+  </form>
+</section>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const status = document.getElementById('form-status');
+
+    // Валидация
+    if (!name || !email || !message) {
+      status.textContent = '❗ Заполните все поля';
+      status.style.color = 'red';
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = '❗ Неверный email';
+      status.style.color = 'red';
+      return;
+    }
+
+    // Успех
+    status.textContent = '✅ Сообщение отправлено!';
+    status.style.color = 'green';
+    this.reset(); // Очистить форму
+  });
+</script>
   <header class="header">
     <div class="container">
       <a href="index.html" class="logo">MS</a>
@@ -55,3 +124,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
