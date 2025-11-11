@@ -1,78 +1,70 @@
-// --- Портфолио: фильтрация и модалка ---
-function renderProjects(filter = 'all') {
-  const container = document.getElementById('projectsContainer');
-  if (!container) return;
+// Фильтрация портфолио
+document.querySelectorAll('.filters button').forEach(button => {
+  button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
 
-  const filtered = filter === 'all' 
-    ? projects 
-    : projects.filter(p => p.category === filter);
+    // Обновляем активную кнопку
+    document.querySelectorAll('.filters button').forEach(b => {
+      b.classList.toggle('active', b === button);
+    });
 
-  container.innerHTML = filtered.map(p => `
-    <div class="project-card" data-id="${p.id}">
-      <h3>${p.title}</h3>
-      <p>${p.description}</p>
-      <button class="view-btn" data-id="${p.id}">Подробнее</button>
-    </div>
-  `).join('');
-
-  // Вешаем обработчики
-  document.querySelectorAll('.view-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = Number(btn.dataset.id);
-      const project = projects.find(p => p.id === id);
-      document.getElementById('modal-title').textContent = project.title;
-      document.getElementById('modal-description').textContent = project.description;
-      document.getElementById('modal-category').textContent = project.category;
-      document.getElementById('modal').style.display = 'flex';
+    // Фильтруем проекты
+    document.querySelectorAll('.project-card').forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
     });
   });
-}
+});
+
+// Модальное окно (при клике на проект)
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const title = card.querySelector('h3').textContent;
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal').style.display = 'flex';
+  });
+});
 
 // Закрытие модалки
-document.querySelector('.close')?.addEventListener('click', () => {
+document.querySelector('.close').addEventListener('click', () => {
   document.getElementById('modal').style.display = 'none';
 });
 
-// Фильтрация
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderProjects(btn.dataset.filter);
+window.addEventListener('click', (e) => {
+  if (e.target.id === 'modal') {
+    document.getElementById('modal').style.display = 'none';
+  }
+});
+
+// Валидация формы
+const form = document.getElementById('contact-form');
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const status = document.getElementById('form-status');
+
+    if (!name || !email || !message) {
+      status.textContent = 'Заполните все поля';
+      status.style.color = '#dc2626';
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      status.textContent = 'Неверный формат email';
+      status.style.color = '#dc2626';
+      return;
+    }
+
+    status.textContent = 'Сообщение отправлено! Свяжусь в ближайшее время.';
+    status.style.color = '#059669';
+    this.reset();
   });
-});
-
-// Инициализация портфолио
-if (document.getElementById('projectsContainer')) {
-  renderProjects('all');
 }
-
-// --- Форма обратной связи ---
-document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const msg = document.getElementById('formMessage');
-
-  if (name.length < 2) {
-    msg.textContent = 'Имя должно быть от 2 символов';
-    msg.style.color = 'red';
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    msg.textContent = 'Неверный формат email';
-    msg.style.color = 'red';
-    return;
-  }
-  if (message.length < 10) {
-    msg.textContent = 'Сообщение должно быть от 10 символов';
-    msg.style.color = 'red';
-    return;
-  }
-
-  msg.textContent = 'Спасибо! Я скоро отвечу.';
-  msg.style.color = 'green';
-  this.reset();
-});
