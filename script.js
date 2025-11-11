@@ -1,99 +1,95 @@
-// script.js
+// js/script.js
 import { projects } from './projects.js';
 
-// === Главная: избранные (первые 3) ===
-if (document.getElementById('featured')) {
-  const featured = projects.slice(0, 3);
-  document.getElementById('featured').innerHTML = featured.map(p => `
-    <div class="project-card" data-id="${p.id}" data-category="${p.category}">
-      <img src="${p.image}" alt="${p.title}">
-      <h3>${p.title}</h3>
-    </div>
-  `).join('');
+document.addEventListener('DOMContentLoaded', () => {
+  // Генерация карточек проектов
+  const projectsGrid = document.getElementById('projects-grid');
+  if (projectsGrid) {
+    projects.forEach(project => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.dataset.category = project.category;
 
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', () => openModal(Number(card.dataset.id)));
-  });
-}
+      card.innerHTML = `
+        <img src="${project.image}" alt="${project.title}">
+        <h3>${project.title}</h3>
+        <p>${project.description}</p>
+        <button class="open-modal" data-id="${project.id}">Подробнее</button>
+      `;
 
-// === Портфолио: все проекты + фильтры ===
-if (document.getElementById('projectsGrid')) {
-  const grid = document.getElementById('projectsGrid');
-  grid.innerHTML = projects.map(p => `
-    <div class="project-card" data-id="${p.id}" data-category="${p.category}">
-      <img src="${p.image}" alt="${p.title}">
-      <h3>${p.title}</h3>
-    </div>
-  `).join('');
+      projectsGrid.appendChild(card);
+    });
+  }
 
-  // Фильтрация
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.project-card').forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
+  // Фильтрация проектов
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.category;
+
+      projectCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
       });
+
+      // Стиль активной кнопки
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
     });
   });
 
-  // Модалка
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', () => openModal(Number(card.dataset.id)));
-  });
-}
-
-// === Модальное окно (только фото) ===
-function openModal(id) {
-  const p = projects.find(pr => pr.id === id);
-  if (!p) return;
-
+  // Модальное окно
   const modal = document.getElementById('modal');
-  const img = document.getElementById('modalImage');
-  const title = document.getElementById('modalTitle');
-  const desc = document.getElementById('modalDescription');
+  const openModalBtns = document.querySelectorAll('.open-modal');
+  const closeModal = document.querySelector('.close');
 
-  img.src = p.image;
-  title.textContent = p.title;
-  desc.textContent = p.description;
-  modal.style.display = 'block';
-}
-
-// Закрытие модалки
-if (document.getElementById('modal')) {
-  const modal = document.getElementById('modal');
-  document.querySelector('.close').onclick = () => modal.style.display = 'none';
-  window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
-}
-
-// === Форма ===
-if (document.getElementById('contactForm')) {
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    const feedback = document.getElementById('formMessage');
-
-    if (!name || !email || !message) {
-      feedback.textContent = 'Все поля обязательны!';
-      feedback.style.color = 'red';
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      feedback.textContent = 'Неверный email!';
-      feedback.style.color = 'red';
-      return;
-    }
-
-    feedback.textContent = 'Сообщение отправлено!';
-    feedback.style.color = 'green';
-    this.reset();
+  openModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.style.display = 'block';
+      document.body.classList.add('no-scroll');
+    });
   });
-}
+
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }
+  });
+
+  // Валидация формы
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+      const inputs = form.querySelectorAll('input, textarea');
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          input.classList.add('error');
+          isValid = false;
+        } else {
+          input.classList.remove('error');
+        }
+      });
+      if (isValid) {
+        alert('Форма успешно отправлена!');
+        form.reset();
+      }
+    });
+  }
+});
+
 
 
 
