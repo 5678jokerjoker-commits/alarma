@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Портфолио</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <nav>
-    <a href="index.html">Главная</a>
-    <a href="about.html">Обо мне</a>
-    <a href="portfolio.html">Портфолио</a>
-    <a href="contact.html">Контакты</a>
-  </nav>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">Обо мне</a></li>
+        <li><a href="portfolio.html">Портфолио</a></li>
+        <li><a href="contact.html">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <main class="container">
-    <h1>Портфолио</h1>
+  <main>
+    <section class="portfolio">
+      <h1>Портфолио</h1>
 
-    <div class="filters">
-      <button class="filter-btn active" data-filter="all">Все</button>
-      <button class="filter-btn" data-filter="landing">Лендинги</button>
-      <button class="filter-btn" data-filter="ecommerce">Интернет-магазины</button>
-      <button class="filter-btn" data-filter="blog">Блоги</button>
-      <button class="filter-btn" data-filter="website">Сайты</button>
-      <button class="filter-btn" data-filter="portfolio">Портфолио</button>
-    </div>
+      <div class="filters">
+        <button class="filter-btn active" data-category="all">Все</button>
+        <button class="filter-btn" data-category="web">Веб-сайты</button>
+        <button class="filter-btn" data-category="ecommerce">E-commerce</button>
+        <button class="filter-btn" data-category="landing">Лендинги</button>
+      </div>
 
-    <div class="projects-grid" id="projectsGrid"></div>
+      <div class="projects-grid" id="projects-grid">
+        <!-- Проекты будут добавлены через JS -->
+      </div>
+    </section>
   </main>
 
-  <!-- Модальное окно -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <img id="modalImage" src="" alt="" />
-      <h2 id="modalTitle"></h2>
-      <p id="modalDescription"></p>
-    </div>
-  </div>
-
-  <script type="module" src="script.js"></script>
+  <script type="module" src="js/script.js"></script>
 </body>
 </html>
+
 
 
 
