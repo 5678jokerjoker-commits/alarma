@@ -1,82 +1,107 @@
-// === ФИЛЬТРАЦИЯ ПОРТФОЛИО ===
-document.addEventListener('DOMContentLoaded', () => {
-  // Только если есть фильтры
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  if (filterButtons.length > 0) {
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filter = button.dataset.filter;
+// script.js
+import { projects } from './projects.js';
 
-        // Обновляем активную кнопку
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        // Фильтруем проекты
-        document.querySelectorAll('.project-card').forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  }
-
-  // === МОДАЛЬНОЕ ОКНО ===
-  const projectCards = document.querySelectorAll('.project-card');
+if (document.getElementById('projectsGrid')) {
+  const grid = document.getElementById('projectsGrid');
   const modal = document.getElementById('modal');
-  
-  if (projectCards.length > 0 && modal) {
-    projectCards.forEach(card => {
-      card.addEventListener('click', () => {
-        const imgSrc = card.querySelector('img').src;
-        const title = card.querySelector('h3').textContent;
-        document.getElementById('modal-img').src = imgSrc;
-        document.getElementById('modal-title').textContent = title;
-        modal.style.display = 'flex';
+  const closeModal = () => {
+    modal.style.display = 'none';
+    // Останавливаем видео при закрытии!
+    const video = document.getElementById('modalVideo');
+    if (video) video.pause();
+  };
+
+  // Рендер карточек
+  grid.innerHTML = projects.map(p => `
+    <div class="project-card" data-id="${p.id}" data-category="${p.category}">
+      <img src="${p.image}" alt="${p.title}">
+      <div class="card-badge">${p.category === 'video' ? '📹' : p.category === 'reels' ? '📱' : '📷'}</div>
+      <h3>${p.title}</h3>
+    </div>
+  `).join('');
+
+  // Фильтрация
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'block' : 'none';
       });
     });
+  });
 
-    // Закрытие модалки
-    document.querySelector('.close')?.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
+  // Модальное окно с фото или видео
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = Number(card.dataset.id);
+      const p = projects.find(pr => pr.id === id);
+      if (!p) return;
 
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) modal.style.display = 'none';
-    });
-  }
+      const mediaContainer = document.getElementById('modalMedia');
+      const title = document.getElementById('modalTitle');
+      const desc = document.getElementById('modalDescription');
 
-  // === ФОРМА ОБРАТНОЙ СВЯЗИ ===
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
+      // Очищаем контейнер
+      mediaContainer.innerHTML = '';
 
-      const name = document.getElementById('name')?.value.trim();
-      const email = document.getElementById('email')?.value.trim();
-      const message = document.getElementById('message')?.value.trim();
-      const status = document.getElementById('form-status');
-
-      if (!name || !email || !message) {
-        status.textContent = '⚠️ Заполните все поля';
-        status.style.color = '#ef4444';
-        return;
+      if (p.video) {
+        // Видео
+        const video = document.createElement('video');
+        video.id = 'modalVideo';
+        video.src = p.video;
+        video.controls = true;
+        video.style.width = '100%';
+        video.style.borderRadius = '8px';
+        mediaContainer.appendChild(video);
+      } else {
+        // Фото
+        const img = document.createElement('img');
+        img.src = p.image;
+        img.alt = p.title;
+        img.style.width = '100%';
+        img.style.borderRadius = '8px';
+        mediaContainer.appendChild(img);
       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        status.textContent = '⚠️ Неверный формат email';
-        status.style.color = '#ef4444';
-        return;
-      }
-
-      status.textContent = '✅ Сообщение отправлено! Спасибо!';
-      status.style.color = '#10b981';
-      this.reset();
+      title.textContent = p.title;
+      desc.textContent = p.description;
+      modal.style.display = 'block';
     });
-  }
-});
+  });
+
+  document.querySelector('.close').onclick = closeModal;
+  window.onclick = (e) => { if (e.target === modal) closeModal(); };
+}
+
+// ========= Форма =========
+if (document.getElementById('contactForm')) {
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name')?.value.trim();
+    const email = document.getElementById('email')?.value.trim();
+    const message = document.getElementById('message')?.value.trim();
+    const feedback = document.getElementById('formMessage');
+
+    if (!name || !email || !message) {
+      feedback.textContent = 'Все поля обязательны!';
+      feedback.style.color = 'red';
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      feedback.textContent = 'Неверный email!';
+      feedback.style.color = 'red';
+      return;
+    }
+
+    feedback.textContent = 'Спасибо! Свяжемся в ближайшее время.';
+    feedback.style.color = 'green';
+    this.reset();
+  });
+}
+
 
 
