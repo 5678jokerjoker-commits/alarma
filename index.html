@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Creative Studio — Видео и Фото</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мое портфолио</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <nav>
-    <a href="index.html">Главная</a>
-    <a href="about.html">Обо мне</a>
-    <a href="portfolio.html">Портфолио</a>
-    <a href="contact.html">Контакты</a>
-  </nav>
-
-  <header class="hero">
-    <h1>Creative Studio</h1>
-    <p>Профессиональная фото- и видеосъёмка для брендов и людей</p>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">Обо мне</a></li>
+        <li><a href="portfolio.html">Портфолио</a></li>
+        <li><a href="contact.html">Контакты</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="container">
-    <h2>Избранные работы</h2>
-    <div class="featured" id="featured"></div>
+  <main>
+    <section class="hero">
+      <h1>Привет! Я — разработчик</h1>
+      <p>Создаю интерактивные веб-сайты и приложения</p>
+      <a href="portfolio.html">Посмотреть проекты</a>
+    </section>
   </main>
 
-  <script type="module" src="script.js"></script>
+  <!-- Модальное окно -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Детали проекта</h2>
+      <p>Здесь будет информация о проекте.</p>
+    </div>
+  </div>
+
+  <script type="module" src="js/script.js"></script>
 </body>
 </html>
 
