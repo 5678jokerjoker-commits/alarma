@@ -3,125 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Контакты | Мария Соколова</title>
+  <title>Контакты — Creative Studio</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section style="padding: 60px 20px; text-align: center;">
-  <h2>Свяжитесь со мной</h2>
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="about.html">Обо мне</a>
+    <a href="portfolio.html">Портфолио</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
 
-  <form id="contact-form" style="max-width: 500px; margin: 30px auto; text-align: left;">
-    <div style="margin-bottom: 16px;">
-      <input
-        type="text"
-        id="name"
-        placeholder="Ваше имя"
-        required
-        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px;"
-      >
-    </div>
-    <div style="margin-bottom: 16px;">
-      <input
-        type="email"
-        id="email"
-        placeholder="Ваш email"
-        required
-        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px;"
-      >
-    </div>
-    <div style="margin-bottom: 16px;">
-      <textarea
-        id="message"
-        placeholder="Сообщение"
-        required
-        rows="5"
-        style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; resize: vertical;"
-      ></textarea>
-    </div>
-    <button
-      type="submit"
-      style="width: 100%; padding: 14px; background: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;"
-    >
-      Отправить
-    </button>
-    <p id="form-status" style="margin-top: 12px; text-align: center; font-weight: bold;"></p>
-  </form>
-</section>
+  <main class="container">
+    <h1>Связаться со мной</h1>
+    <p>Напишите, если хотите заказать съёмку или обсудить проект.</p>
 
-<script>
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Ваше имя" required>
+      <input type="email" id="email" placeholder="Ваш email" required>
+      <textarea id="message" rows="5" placeholder="Сообщение" required></textarea>
+      <button type="submit">Отправить</button>
+      <p id="formMessage"></p>
+    </form>
+  </main>
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-    const status = document.getElementById('form-status');
-
-    // Валидация
-    if (!name || !email || !message) {
-      status.textContent = '❗ Заполните все поля';
-      status.style.color = 'red';
-      return;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      status.textContent = '❗ Неверный email';
-      status.style.color = 'red';
-      return;
-    }
-
-    // Успех
-    status.textContent = '✅ Сообщение отправлено!';
-    status.style.color = 'green';
-    this.reset(); // Очистить форму
-  });
-</script>
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">MS</a>
-      <nav class="nav">
-        <a href="index.html">Главная</a>
-        <a href="portfolio.html">Портфолио</a>
-        <a href="contacts.html">Контакты</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="contact-section">
-    <div class="container">
-      <h1>Связаться со мной</h1>
-      <p class="section-subtitle">Расскажите о своём проекте — отвечу в течение 24 часов</p>
-
-      <div class="contact-wrapper">
-        <form id="contact-form" class="contact-form">
-          <input type="text" id="name" placeholder="Ваше имя" required>
-          <input type="email" id="email" placeholder="Ваш email" required>
-          <textarea id="message" placeholder="Описание проекта или вопрос" required></textarea>
-          <button type="submit" class="btn primary">Отправить</button>
-          <p id="form-status"></p>
-        </form>
-
-        <div class="contact-details">
-          <h3>Контактная информация</h3>
-          <p>📧 maria.sokolova@example.com</p>
-          <p>📱 +7 (921) 123-45-67</p>
-          <p>📍 Санкт-Петербург, Россия</p>
-          <div class="map">
-            <img src="https://picsum.photos/id/1032/600/300" alt="Карта" style="width:100%; border-radius:12px; margin-top:20px;">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Мария Соколова</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
-
