@@ -1,86 +1,44 @@
+<!-- portfolio.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Портфолио | Мария Соколова</title>
+  <title>Портфолио — Creative Studio</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">MS</a>
-      <nav class="nav">
-        <a href="index.html">Главная</a>
-        <a href="portfolio.html">Портфолио</a>
-        <a href="contacts.html">Контакты</a>
-      </nav>
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="portfolio.html">Портфолио</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
+
+  <main class="container">
+    <h1>Наши работы</h1>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Все</button>
+      <button class="filter-btn" data-filter="photo">Фото</button>
+      <button class="filter-btn" data-filter="video">Видео</button>
+      <button class="filter-btn" data-filter="reels">Сторис</button>
     </div>
-  </header>
 
-  <section class="portfolio-section">
-    <div class="container">
-      <h1>Портфолио</h1>
-      <p class="section-subtitle">Проекты, над которыми я работала</p>
-
-      <div class="filters">
-        <button data-filter="all" class="filter-btn active">Все</button>
-        <button data-filter="web" class="filter-btn">Веб</button>
-        <button data-filter="mobile" class="filter-btn">Мобильные</button>
-        <button data-filter="branding" class="filter-btn">Брендинг</button>
-      </div>
-
-      <div class="projects-grid">
-        <div class="project-card" data-category="web">
-          <img src="https://picsum.photos/id/1015/600/400" alt="Интернет-магазин">
-          <div class="project-info">
-            <h3>Интернет-магазин модной одежды</h3>
-            <p>UX/UI дизайн, прототипирование, дизайн-система</p>
-          </div>
-        </div>
-        <div class="project-card" data-category="mobile">
-          <img src="https://picsum.photos/id/1019/600/400" alt="Мобильное приложение">
-          <div class="project-info">
-            <h3>Приложение для медитации</h3>
-            <p>Исследование, user flow, интерфейс iOS/Android</p>
-          </div>
-        </div>
-        <div class="project-card" data-category="branding">
-          <img src="https://picsum.photos/id/1021/600/400" alt="Брендинг">
-          <div class="project-info">
-            <h3>Фирменный стиль кофейни</h3>
-            <p>Логотип, палитра, упаковка, гайдлайн</p>
-          </div>
-        </div>
-        <div class="project-card" data-category="web">
-          <img src="https://picsum.photos/id/1022/600/400" alt="SaaS">
-          <div class="project-info">
-            <h3>Панель администратора для SaaS</h3>
-            <p>Информационная архитектура, компоненты, dark mode</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </main>
 
   <!-- Модальное окно -->
-  <div id="modal" class="modal">
+  <div class="modal" id="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <img id="modal-img" src="" alt="" class="modal-img">
-      <h2 id="modal-title">Название проекта</h2>
-      <p id="modal-desc">Подробное описание: цели, задачи, метрики, использованные инструменты (Figma, UserTesting, etc.).</p>
+      <div id="modalMedia"></div>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Мария Соколова</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
+
 
