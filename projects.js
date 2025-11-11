@@ -1,24 +1,38 @@
+// js/projects.js
 
-const projects = [
+export const projects = [
   {
     id: 1,
-    title: "Интернет-магазин",
+    title: "Сайт-визитка",
+    description: "Современный сайт-визитка для компании.",
     category: "web",
-    description: "Полноценный магазин с каталогом и корзиной (без оплаты). Адаптивный дизайн, локальное хранение."
+    image: "images/project1.jpg",
+    link: "#"
   },
   {
     id: 2,
-    title: "Приложение для заметок",
-    category: "mobile",
-    description: "Мобильное веб-приложение на JavaScript. Сохраняет заметки в localStorage."
+    title: "E-commerce магазин",
+    description: "Интернет-магазин с фильтрами и корзиной.",
+    category: "ecommerce",
+    image: "images/project2.jpg",
+    link: "#"
   },
   {
     id: 3,
-    title: "Лендинг стартапа",
+    title: "Лендинг приложения",
+    description: "Продающий лендинг для мобильного приложения.",
+    category: "landing",
+    image: "images/project3.jpg",
+    link: "#"
+  },
+  {
+    id: 4,
+    title: "Корпоративный сайт",
+    description: "Сайт для крупной компании.",
     category: "web",
-    description: "Современный лендинг с анимациями, формой и адаптивной навигацией."
+    image: "images/project4.jpg",
+    link: "#"
   }
-
 ];
 
 
