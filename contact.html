@@ -3,57 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Контакты | Анна Левина</title>
+  <title>Контакты | Мария Соколова</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
     <div class="container">
-      <nav>
-        <a href="index.html" class="logo">AL</a>
-        <ul>
-          <li><a href="index.html">Главная</a></li>
-          <li><a href="portfolio.html">Портфолио</a></li>
-          <li><a href="contacts.html">Контакты</a></li>
-        </ul>
+      <a href="index.html" class="logo">MS</a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="portfolio.html">Портфолио</a>
+        <a href="contacts.html">Контакты</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="contact-section">
-      <div class="container">
-        <h1>Свяжитесь со мной</h1>
-        <p class="subtitle">Готова обсудить ваш проект!</p>
+  <section class="contact-section">
+    <div class="container">
+      <h1>Связаться со мной</h1>
+      <p class="section-subtitle">Расскажите о своём проекте — отвечу в течение 24 часов</p>
 
-        <div class="contact-content">
-          <form id="contact-form">
-            <input type="text" id="name" placeholder="Ваше имя" required />
-            <input type="email" id="email" placeholder="Ваш email" required />
-            <textarea id="message" placeholder="Опишите ваш проект" required></textarea>
-            <button type="submit">Отправить сообщение</button>
-            <p id="form-status"></p>
-          </form>
+      <div class="contact-wrapper">
+        <form id="contact-form" class="contact-form">
+          <input type="text" id="name" placeholder="Ваше имя" required>
+          <input type="email" id="email" placeholder="Ваш email" required>
+          <textarea id="message" placeholder="Описание проекта или вопрос" required></textarea>
+          <button type="submit" class="btn primary">Отправить</button>
+          <p id="form-status"></p>
+        </form>
 
-          <div class="contact-info">
-            <h3>Контактная информация</h3>
-            <p>📧 anna.levina@example.com</p>
-            <p>📱 +7 (999) 123-45-67</p>
-            <p>📍 Москва, Россия</p>
-
-            <div class="map-placeholder">
-              <p>Интерактивная карта</p>
-              <div class="map-dot"></div>
-            </div>
+        <div class="contact-details">
+          <h3>Контактная информация</h3>
+          <p>📧 maria.sokolova@example.com</p>
+          <p>📱 +7 (921) 123-45-67</p>
+          <p>📍 Санкт-Петербург, Россия</p>
+          <div class="map">
+            <img src="https://picsum.photos/id/1032/600/300" alt="Карта" style="width:100%; border-radius:12px; margin-top:20px;">
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Анна Левина</p>
+      <p>&copy; 2025 Мария Соколова</p>
     </div>
   </footer>
 
