@@ -1,39 +1,24 @@
-// js/projects.js
-
-export const projects = [
+// projects.js
+const projects = [
   {
     id: 1,
-    title: "Сайт-визитка",
-    description: "Современный сайт-визитка для компании.",
-    category: "web",
-    image: "images/project1.jpg",
-    link: "#"
+    title: "Сайт-визитка на JS",
+    description: "Интерактивный сайт с фильтрацией и модалками.",
+    image: "https://placehold.co/600x400/007bff/white?text=JS+Project",  // Заглушка
+    tags: ["js", "css"]
   },
   {
     id: 2,
-    title: "E-commerce магазин",
-    description: "Интернет-магазин с фильтрами и корзиной.",
-    category: "ecommerce",
-    image: "images/project2.jpg",
-    link: "#"
+    title: "Таск-менеджер на React",
+    description: "SPA для управления задачами.",
+    image: "https://placehold.co/600x400/28a745/white?text=React+App",  // Заглушка
+    tags: ["react", "js"]
   },
   {
     id: 3,
-    title: "Лендинг приложения",
-    description: "Продающий лендинг для мобильного приложения.",
-    category: "landing",
-    image: "images/project3.jpg",
-    link: "#"
-  },
-  {
-    id: 4,
-    title: "Корпоративный сайт",
-    description: "Сайт для крупной компании.",
-    category: "web",
-    image: "images/project4.jpg",
-    link: "#"
+    title: "Лендинг продукта",
+    description: "Адаптивный лендинг с анимациями.",
+    image: "https://placehold.co/600x400/dc3545/white?text=Landing",  // Заглушка
+    tags: ["css", "html"]
   }
 ];
-
-
-
