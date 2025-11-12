@@ -4,21 +4,28 @@ const projects = [
     id: 1,
     title: "Сайт-визитка на JS",
     description: "Интерактивный сайт с фильтрацией и модалками.",
-    image: "https://placehold.co/600x400/007bff/white?text=JS+Project",  // Заглушка
+    image: "https://placehold.co/600x400/007bff/white?text=JS+Project",
     tags: ["js", "css"]
   },
   {
     id: 2,
     title: "Таск-менеджер на React",
     description: "SPA для управления задачами.",
-    image: "https://placehold.co/600x400/28a745/white?text=React+App",  // Заглушка
+    image: "https://placehold.co/600x400/28a745/white?text=React+App",
     tags: ["react", "js"]
   },
   {
     id: 3,
     title: "Лендинг продукта",
     description: "Адаптивный лендинг с анимациями.",
-    image: "https://placehold.co/600x400/dc3545/white?text=Landing",  // Заглушка
+    image: "https://placehold.co/600x400/dc3545/white?text=Landing",
     tags: ["css", "html"]
+  },
+  {
+    id: 4,
+    title: "Игра на Canvas",
+    description: "Интерактивная игра на HTML5 Canvas.",
+    image: "https://placehold.co/600x400/ffc107/000?text=Canvas+Game",
+    tags: ["js", "canvas"]
   }
 ];
