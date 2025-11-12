@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Портфолио</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
     <nav>
-      <ul>
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="about.html">Обо мне</a></li>
-        <li><a href="portfolio.html">Портфолио</a></li>
-        <li><a href="contact.html">Контакты</a></li>
-      </ul>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
     </nav>
-  </header>
 
-  <main>
-    <section class="portfolio">
-      <h1>Портфолио</h1>
+    <main>
+        <section id="portfolio">
+            <h2>Мои проекты</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="js">JavaScript</button>
+                <button class="filter-btn" data-filter="react">React</button>
+                <button class="filter-btn" data-filter="css">CSS</button>
+            </div>
+            <div id="projects-grid" class="grid">
+                <!-- Проекты будут загружены через JS -->
+            </div>
+        </section>
+    </main>
 
-      <div class="filters">
-        <button class="filter-btn active" data-category="all">Все</button>
-        <button class="filter-btn" data-category="web">Веб-сайты</button>
-        <button class="filter-btn" data-category="ecommerce">E-commerce</button>
-        <button class="filter-btn" data-category="landing">Лендинги</button>
-      </div>
+    <!-- Модальное окно -->
+    <dialog id="modal">
+        <h3 id="modal-title"></h3>
+        <p id="modal-description"></p>
+        <img id="modal-image" src="" alt="">
+        <button id="close-modal">Закрыть</button>
+    </dialog>
 
-      <div class="projects-grid" id="projects-grid">
-        <!-- Проекты будут добавлены через JS -->
-      </div>
-    </section>
-  </main>
+    <footer>
+        <p>&copy; 2025. Все права защищены.</p>
+    </footer>
 
-  <script type="module" src="js/script.js"></script>
+    <script src="projects.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
