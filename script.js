@@ -1,5 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Логика для портфолио
+    // Логика для "Обо мне"
+    if (document.getElementById('toggle-details')) {
+        const button = document.getElementById('toggle-details');
+        const extraDetails = document.getElementById('extra-details');
+
+        button.addEventListener('click', () => {
+            extraDetails.classList.toggle('hidden');
+            button.textContent = extraDetails.classList.contains('hidden') ? 'Подробнее' : 'Свернуть';
+        });
+    }
+
+    // Остальная логика (портфолио, форма и т.д.)
     if (document.querySelector('#projects-grid')) {
         renderProjects(projects);
 
@@ -12,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Модальное окно
     const modal = document.getElementById('modal');
     const closeModal = document.getElementById('close-modal');
 
@@ -31,18 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeModal.addEventListener('click', () => modal.close());
 
-    // Логика для "Обо мне"
-    if (document.getElementById('toggle-details')) {
-        const button = document.getElementById('toggle-details');
-        const extraDetails = document.getElementById('extra-details');
-
-        button.addEventListener('click', () => {
-            extraDetails.classList.toggle('hidden');
-            button.textContent = extraDetails.classList.contains('hidden') ? 'Подробнее' : 'Свернуть';
-        });
-    }
-
-    // Форма
     const form = document.getElementById('contact-form');
     if (form) {
         form.addEventListener('submit', (e) => {
