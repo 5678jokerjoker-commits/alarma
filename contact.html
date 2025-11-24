@@ -33,22 +33,34 @@
     </footer>
 
     <script src="script.js"></script>
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
-  authDomain: "testik-b6f72.firebaseapp.com",
-  projectId: "testik-b6f72",
-  storageBucket: "testik-b6f72.firebasestorage.app",
-  messagingSenderId: "398523760786",
-  appId: "1:398523760786:web:35ecca7778ebe25564a64b"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
+    authDomain: "testik-b6f72.firebaseapp.com",
+    projectId: "testik-b6f72",
+    storageBucket: "testik-b6f72.firebasestorage.app",
+    messagingSenderId: "398523760786",
+    appId: "1:398523760786:web:35ecca7778ebe25564a64b"
+  };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Обработка формы
+  document.getElementById('feedbackForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await addDoc(collection(db, 'feedback'), {
+      name: document.getElementById('name')?.value || '',
+      email: document.getElementById('email')?.value || '',
+      message: document.getElementById('message')?.value || '',
+      createdAt: serverTimestamp()
+    });
+    alert('✅ Отправлено!');
+    e.target.reset();
+  });
+</script>
 </body>
 </html>
