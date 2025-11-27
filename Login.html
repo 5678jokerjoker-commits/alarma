@@ -1,29 +1,66 @@
-<h3>Регистрация</h3>
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Пароль">
-<button id="regBtn">Зарегистрироваться</button>
 
-<h3>Вход</h3>
-<input id="email2" type="email" placeholder="Email">
-<input id="password2" type="password" placeholder="Пароль">
-<button id="loginBtn">Войти</button>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Авторизация</title>
+</head>
+<body>
+  <h2>Регистрация и Вход</h2>
 
-<p id="status"></p>
-document.getElementById("regBtn").onclick = () => {
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("password").value;
+  <!-- Форма регистрации -->
+  <h3>Регистрация</h3>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Пароль">
+  <button id="regBtn">Зарегистрироваться</button>
 
-  createUserWithEmailAndPassword(auth, email, pass)
-    .then(() => status.textContent = "Регистрация успешна!")
-    .catch(err => status.textContent = err.message);
-};
+  <!-- Форма входа -->
+  <h3>Вход</h3>
+  <input id="email2" type="email" placeholder="Email">
+  <input id="password2" type="password" placeholder="Пароль">
+  <button id="loginBtn">Войти</button>
 
-document.getElementById("loginBtn").onclick = () => {
-  const email = document.getElementById("email2").value;
-  const pass = document.getElementById("password2").value;
+  <p id="status"></p>
 
-  signInWithEmailAndPassword(auth, email, pass)
-    .then(() => status.textContent = "Вход выполнен!")
-    .catch(err => status.textContent = err.message);
-};
+  <!-- Скрипт Firebase и обработчики -->
+  <script type="module">
+    // 1️⃣ Импорт Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // 2️⃣ Настройки вашего Firebase проекта
+    const firebaseConfig = {
+      apiKey: "ВАШ_API_KEY",
+      authDomain: "ВАШ_ПРОЕКТ.firebaseapp.com",
+      projectId: "ВАШ_ПРОЕКТ_ID",
+    };
+
+    // 3️⃣ Инициализация Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 4️⃣ Обработчик кнопки регистрации
+    document.getElementById("regBtn").onclick = () => {
+      const email = document.getElementById("email").value;
+      const pass = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then(() => document.getElementById("status").textContent = "Регистрация успешна!")
+        .catch(err => document.getElementById("status").textContent = err.message);
+    };
+
+    // 5️⃣ Обработчик кнопки входа
+    document.getElementById("loginBtn").onclick = () => {
+      const email = document.getElementById("email2").value;
+      const pass = document.getElementById("password2").value;
+
+      signInWithEmailAndPassword(auth, email, pass)
+        .then(() => document.getElementById("status").textContent = "Вход выполнен!")
+        .catch(err => document.getElementById("status").textContent = err.message);
+    };
+  </script>
+</body>
+</html>
 
