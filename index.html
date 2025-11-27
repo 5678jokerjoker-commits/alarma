@@ -22,7 +22,6 @@
         <a href="portfolio.html" class="btn">Смотреть проекты</a>
     </header>
 
-    <!-- Формы авторизации -->
     <section id="auth-section" style="padding: 20px; max-width: 600px; margin: 30px auto;">
         <h2 style="text-align: center;">Вход и регистрация</h2>
 
@@ -45,10 +44,8 @@
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <!-- Твой скрипт (например, форма обратной связи) -->
     <script src="script.js"></script>
 
-    <!-- Firebase Auth -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
@@ -66,35 +63,60 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        function showMessage(text) {
-            document.getElementById('authMessage').innerText = text;
+        function getErrorMessage(error) {
+            switch (error.code) {
+                case 'auth/invalid-credential':
+                case 'auth/wrong-password':
+                case 'auth/user-not-found':
+                    return 'ОШИБКА! НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ! ПОПРОБУЙТЕ СНОВА!';
+                case 'auth/email-already-in-use':
+                    return 'Этот email уже используется!';
+                case 'auth/invalid-email':
+                    return 'Неверный формат email!';
+                case 'auth/weak-password':
+                    return 'Пароль слишком слабый! Минимум 6 символов.';
+                case 'auth/missing-password':
+                    return 'Введите пароль!';
+                default:
+                    return 'Произошла ошибка. Попробуйте позже.';
+            }
         }
 
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        function showMessage(text) {
+            const el = document.getElementById('authMessage');
+            if (el) el.innerText = text;
+        }
+
+        document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+            const email = document.getElementById('loginEmail')?.value;
+            const password = document.getElementById('loginPassword')?.value;
+            if (!email || !password) return;
+
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 showMessage('✅ Вход выполнен!');
-                window.location.href = 'dashboard.html'; // ← ДОБАВЛЕНО
+                window.location.href = 'dashboard.html';
             } catch (error) {
-                showMessage('❌ ' + error.message);
+                showMessage(getErrorMessage(error));
             }
         });
 
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
+            const email = document.getElementById('registerEmail')?.value;
+            const password = document.getElementById('registerPassword')?.value;
+            if (!email || !password) return;
+
             try {
                 await createUserWithEmailAndPassword(auth, email, password);
                 showMessage('✅ Регистрация успешна!');
-                window.location.href = 'dashboard.html'; // ← ДОБАВЛЕНО
+                window.location.href = 'dashboard.html';
             } catch (error) {
-                showMessage('❌ ' + error.message);
+                showMessage(getErrorMessage(error));
             }
         });
     </script>
 </body>
 </html>
+
