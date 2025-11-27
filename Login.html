@@ -1,0 +1,29 @@
+<h3>Регистрация</h3>
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Пароль">
+<button id="regBtn">Зарегистрироваться</button>
+
+<h3>Вход</h3>
+<input id="email2" type="email" placeholder="Email">
+<input id="password2" type="password" placeholder="Пароль">
+<button id="loginBtn">Войти</button>
+
+<p id="status"></p>
+document.getElementById("regBtn").onclick = () => {
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => status.textContent = "Регистрация успешна!")
+    .catch(err => status.textContent = err.message);
+};
+
+document.getElementById("loginBtn").onclick = () => {
+  const email = document.getElementById("email2").value;
+  const pass = document.getElementById("password2").value;
+
+  signInWithEmailAndPassword(auth, email, pass)
+    .then(() => status.textContent = "Вход выполнен!")
+    .catch(err => status.textContent = err.message);
+};
+
