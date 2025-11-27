@@ -17,7 +17,7 @@
     </nav>
 
     <header>
-        <h1>Привет! Я КОСТЯ Ф. — разработчик</h1>
+        <h1>Привет! Я МУЖИК,имя моё всем известно Костя с большой буквы . — разработчик</h1>
         <p>Создаю интерактивные веб-проекты на JavaScript</p>
         <a href="portfolio.html" class="btn">Смотреть проекты</a>
     </header>
@@ -27,6 +27,21 @@
     </footer>
 
     <script src="script.js"></script>
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "ВАШ_API_KEY",
+    authDomain: "ВАШ_ПРОЕКТ.firebaseapp.com",
+    projectId: "ВАШ_ПРОЕКТ_ID",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+    </script>
 </body>
 </html>
+
 
