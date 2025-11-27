@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио разработчика</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Привет! Я МУЖИК, имя моё всем известно Костя с большой буквы. — разработчик</h1>
+        <p>Создаю интерактивные веб-проекты на JavaScript</p>
+        <a href="portfolio.html" class="btn">Смотреть проекты</a>
+    </header>
+
+    <!-- Формы авторизации -->
+    <section id="auth-section" style="padding: 20px; max-width: 600px; margin: 30px auto;">
+        <h2 style="text-align: center;">Вход и регистрация</h2>
+
+        <form id="loginForm" style="margin-bottom: 20px;">
+            <input type="email" id="loginEmail" placeholder="Email" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
+            <input type="password" id="loginPassword" placeholder="Пароль" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
+            <button type="submit" style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer;">Войти</button>
+        </form>
+
+        <form id="registerForm">
+            <input type="email" id="registerEmail" placeholder="Email" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
+            <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
+            <button type="submit" style="width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer;">Зарегистрироваться</button>
+        </form>
+
+        <p id="authMessage" style="text-align: center; margin-top: 15px; color: red; font-weight: bold;"></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025. Все права защищены.</p>
+    </footer>
+
+    <!-- Твой скрипт (например, форма обратной связи) -->
+    <script src="script.js"></script>
+
+    <!-- Firebase Auth -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
+          from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
+          authDomain: "testik-b6f72.firebaseapp.com",
+          projectId: "testik-b6f72",
+          storageBucket: "testik-b6f72.firebasestorage.app",
+          messagingSenderId: "398523760786",
+          appId: "1:398523760786:web:35ecca7778ebe25564a64b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        function showMessage(text) {
+            document.getElementById('authMessage').innerText = text;
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showMessage('✅ Вход выполнен!');
+                window.location.href = 'dashboard.html'; // ← перенаправление
+            } catch (error) {
+                showMessage('❌ ' + error.message);
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                showMessage('✅ Регистрация успешна!');
+                window.location.href = 'dashboard.html'; // ← перенаправление
+            } catch (error) {
+                showMessage('❌ ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
