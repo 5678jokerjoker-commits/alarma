@@ -1,13 +1,116 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ТУТ БУДЕТ ЖАРКО</title>
-    <link rel="stylesheet" href="style.css"> <!-- Подключаем твой основной CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 🔥 ФИКС БЕЛОЙ ПОЛОСЫ СБОКУ -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            overflow-x: hidden;
+            background: #0f0f0f; /* Тёмный фон, как у тебя */
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            min-height: 100vh; /* Чтобы занимал весь экран */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 20px auto;
+            border: 3px solid white;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ff3300;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
-            <li><a href="about.h
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Доброго времени суток, дамы и господа.<br>Тут скоро будет жарко.<br>Приходите ещё.</h1>
+        
+        <img src="my-photo.jpg" alt="МУЖИК">
+
+        <p id="userEmail">Загрузка...</p>
+        
+        <button id="logoutBtn">Выйти</button>
+    </header>
+
+    <footer>
+        <p>&copy; 2025. Все права защищены.</p>
+    </footer>
+
+    <!-- Firebase Auth -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
+          authDomain: "testik-b6f72.firebaseapp.com",
+          projectId: "testik-b6f72",
+          storageBucket: "testik-b6f72.firebasestorage.app",
+          messagingSenderId: "398523760786",
+          appId: "1:398523760786:web:35ecca7778ebe25564a64b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Проверяем авторизацию
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('userEmail').textContent = `Ваш email: ${user.email}`;
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Обработчик кнопки "Выйти"
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
