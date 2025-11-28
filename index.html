@@ -5,8 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Компактная навигация с линией */
+        nav {
+            background: #007bff;
+            padding: 10px 0;
+            margin: 0;
+            border-bottom: 2px solid white;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* Верхняя половина — синий фон */
+        .top-section {
+            background: #007bff;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            min-height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .top-section h1 {
+            font-size: 1.6rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .top-section p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .top-section .hero-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: white;
+            color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .top-section .hero-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        /* Место для фото в верхней части */
+        .avatar-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #005588;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffcc;
+            font-size: 2rem;
+            border: 3px solid white;
+        }
+
+        /* Нижняя часть — чёрный фон, место под медиа */
+        .bottom-section {
+            background: #0a0a0a;
+            color: white;
+            padding: 20px;
+            min-height: 20vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .media-placeholder {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Формы авторизации */
+        #auth-section {
+            width: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+        #auth-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #authMessage {
+            text-align: center;
+            margin-top: 15px;
+            color: red;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Компактное меню -->
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
@@ -17,14 +147,26 @@
         </ul>
     </nav>
 
-    <header>
-        <h1>Привет! Я МУЖИК, имя моё всем известно Костя с большой буквы. — разработчик</h1>
-        <p>Создаю интерактивные веб-проекты на JavaScript</p>
-        <a href="portfolio.html" class="btn">Смотреть проекты</a>
-    </header>
+    <!-- Верхняя половина -->
+    <div class="top-section">
+        <h1>Привет всем. Я Костя и я Веб Разработчик.</h1>
+        <div class="avatar-placeholder">
+            👨‍💻
+        </div>
+        <a href="portfolio.html" class="hero-btn">Смотреть проекты</a>
+    </div>
 
-    <section id="auth-section" style="padding: 20px; max-width: 600px; margin: 30px auto;">
-        <h2 style="text-align: center;">Вход и регистрация</h2>
+    <!-- Нижняя часть — место под медиа -->
+    <div class="bottom-section">
+        <div class="media-placeholder">
+            <p>Здесь будет ваше видео, фото или гифка</p>
+            <!-- Пример: <img src="preview.jpg" alt="Демо"> -->
+        </div>
+    </div>
+
+    <!-- Формы авторизации -->
+    <section id="auth-section">
+        <h2>Вход и регистрация</h2>
 
         <form id="loginForm" style="margin-bottom: 20px;">
             <input type="email" id="loginEmail" placeholder="Email" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
@@ -38,27 +180,29 @@
             <button type="submit" style="width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer;">Зарегистрироваться</button>
         </form>
 
-        <p id="authMessage" style="text-align: center; margin-top: 15px; color: red; font-weight: bold;"></p>
+        <p id="authMessage"></p>
     </section>
 
     <footer>
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
+    <!-- Твой скрипт -->
     <script src="script.js"></script>
 
+    <!-- Firebase Auth -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
           from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         const firebaseConfig = {
-          apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
-          authDomain: "testik-b6f72.firebaseapp.com",
-          projectId: "testik-b6f72",
-          storageBucket: "testik-b6f72.firebasestorage.app",
-          messagingSenderId: "398523760786",
-          appId: "1:398523760786:web:35ecca7778ebe25564a64b"
+            apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
+            authDomain: "testik-b6f72.firebaseapp.com",
+            projectId: "testik-b6f72",
+            storageBucket: "testik-b6f72.firebasestorage.app",
+            messagingSenderId: "398523760786",
+            appId: "1:398523760786:web:35ecca7778ebe25564a64b"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -120,5 +264,7 @@
     </script>
 </body>
 </html>
+                
+
 
 
