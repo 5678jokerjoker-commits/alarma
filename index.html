@@ -1,340 +1,322 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио разработчика</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Основной стиль */
-        body {
-            margin: 0;
-            padding-top: 70px;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            position: relative;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Портфолио Кости</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Общие настройки */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Блёстки */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 15% 30%, rgba(255,215,0,0.2) 1px, transparent 1px),
-                radial-gradient(circle at 85% 70%, rgba(0,200,255,0.15) 1px, transparent 1px),
-                radial-gradient(circle at 50% 20%, rgba(255,105,180,0.1) 1px, transparent 1px);
-            pointer-events: none;
-            z-index: -1;
-            animation: twinkle 10s infinite alternate;
-        }
+    body {
+      background: #0a0a0f;
+      color: #e0e0ff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 70px;
+    }
 
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
+    /* Неоновая рамка — центральный элемент */
+    .neon-frame {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: 40px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 4px solid transparent;
+      border-radius: 12px;
+      background: #000;
+      animation: glow-pulse 3s infinite alternate;
+      box-shadow:
+        0 0 15px #0ff,
+        0 0 30px rgba(0, 100, 255, 0.6),
+        inset 0 0 10px rgba(0, 200, 255, 0.3);
+    }
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
+    @keyframes glow-pulse {
+      0% {
+        box-shadow:
+          0 0 15px #0ff,
+          0 0 30px rgba(0, 100, 255, 0.5),
+          inset 0 0 10px rgba(0, 200, 255, 0.2);
+      }
+      100% {
+        box-shadow:
+          0 0 25px #0af,
+          0 0 50px rgba(0, 50, 255, 0.8),
+          inset 0 0 15px rgba(0, 255, 255, 0.4);
+      }
+    }
 
-        /* Сияющий заголовок */
-        header h1 {
-            font-size: 2.2rem;
-            line-height: 1.3;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #ff7e5f, #feb47b, #ff6a88, #ff7e5f);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shimmer 4s ease-in-out infinite;
-        }
+    /* Контент внутри рамки (позже: <img> или <video>) */
+    .neon-frame .content {
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 20, 0.6);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #aaa;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 10px;
+    }
 
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    /* Навигация — брутальная и чёткая */
+    nav {
+      background: #000;
+      padding: 12px 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      border-bottom: 1px solid #003366;
+    }
 
-        header p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-bottom: 25px;
-        }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
 
-        /* Неоновая кнопка */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(90deg, #ff6b6b, #ff8e53);
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 30px;
-            box-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 1.1rem;
-        }
+    nav a {
+      color: #88ccff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 6px rgba(100, 200, 255, 0.7);
+    }
 
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 107, 107, 0.9);
-            background: linear-gradient(90deg, #ff8e53, #ff6b6b);
-        }
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(0, 80, 180, 0.4);
+      text-shadow: 0 0 10px #4fc3f7;
+    }
 
-        /* Формы входа/регистрации */
-        #auth-section {
-            background: rgba(25, 25, 45, 0.75);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 500px;
-            margin: 20px auto 60px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
+    /* Формы — тёмная тема, брутальные кнопки */
+    #auth-section {
+      padding: 25px;
+      max-width: 560px;
+      margin: 30px auto;
+      background: rgba(10, 10, 25, 0.7);
+      border-radius: 12px;
+      border: 1px solid #003366;
+      box-shadow: 0 0 20px rgba(0, 80, 200, 0.3);
+    }
 
-        #auth-section h2 {
-            margin-top: 0;
-            color: #ff7e5f;
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-        }
+    #auth-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #4fc3f7;
+      text-shadow: 0 0 8px rgba(79, 195, 247, 0.6);
+    }
 
-        #auth-section input {
-            width: 100%;
-            padding: 14px;
-            margin: 8px 0;
-            border: 1px solid rgba(100, 100, 255, 0.3);
-            border-radius: 10px;
-            background: rgba(30, 30, 50, 0.8);
-            color: white;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      background: #0c0c16;
+      border: 1px solid #004488;
+      border-radius: 6px;
+      color: #e0f0ff;
+      font-size: 1rem;
+    }
 
-        #auth-section input::placeholder {
-            color: #888;
-        }
+    input::placeholder {
+      color: #5588aa;
+    }
 
-        #auth-section button {
-            width: 100%;
-            padding: 14px;
-            margin: 12px 0;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.3s;
-        }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.3s;
+    }
 
-        #loginForm button {
-            background: linear-gradient(90deg, #00c6ff, #0072ff);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 118, 255, 0.4);
-        }
+    #loginForm button {
+      background: #0055aa;
+      color: white;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    }
 
-        #loginForm button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 118, 255, 0.7);
-        }
+    #loginForm button:hover {
+      background: #0077cc;
+      box-shadow: 0 0 12px rgba(0, 150, 255, 0.7);
+    }
 
-        #registerForm button {
-            background: linear-gradient(90deg, #00b09b, #96c93d);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 176, 155, 0.4);
-        }
+    #registerForm button {
+      background: #006633;
+      color: white;
+      text-shadow: 0 0 6px rgba(200, 255, 200, 0.8);
+    }
 
-        #registerForm button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 176, 155, 0.7);
-        }
+    #registerForm button:hover {
+      background: #008844;
+      box-shadow: 0 0 12px rgba(0, 200, 100, 0.6);
+    }
 
-        #authMessage {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-            min-height: 1.5em;
-        }
+    #authMessage {
+      text-align: center;
+      margin-top: 15px;
+      color: #ff6b6b;
+      font-weight: bold;
+      min-height: 24px;
+    }
 
-        /* Навигация */
-        nav {
-            background: #007bff;
-            padding: 12px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            border-bottom: 1px solid #0056b3;
-        }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #667799;
+      font-size: 0.9rem;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: space-around;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        nav li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.92rem;
-            padding: 7px 10px;
-            border-radius: 4px;
-        }
-
-        nav li a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Футер */
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(10, 10, 25, 0.9);
-            color: #bbb;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-    </style>
+    @media (max-width: 600px) {
+      .neon-frame {
+        width: 240px;
+        height: 240px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">Обо мне</a></li>
-            <li><a href="portfolio.html">Портфолио</a></li>
-            <li><a href="contact.html">Контакты</a></li>
-            <li><a href="calculator.html">Калькулятор</a></li>
-        </ul>
-    </nav>
+  <!-- Навигация -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="about.html">Обо мне</a></li>
+      <li><a href="portfolio.html">Портфолио</a></li>
+      <li><a href="contact.html">Контакты</a></li>
+      <li><a href="calculator.html">Калькулятор</a></li>
+    </ul>
+  </nav>
 
-    <header>
-        <h1>Привет! Я МУЖИК, имя моё всем известно — Костя с большой буквы!</h1>
-        <p>Создаю интерактивные веб-проекты на JavaScript</p>
-        <a href="portfolio.html" class="btn">Смотреть проекты</a>
-    </header>
+  <!-- Неоновая рамка вместо заголовка -->
+  <div class="neon-frame">
+    <div class="content">
+      <!-- Сюда вставишь фото или видео: <img src="photo.jpg" alt="Костя"> -->
+      Вставь фото
+    </div>
+  </div>
 
-    <section id="auth-section">
-        <h2>Вход и регистрация</h2>
+  <!-- Формы входа/регистрации -->
+  <section id="auth-section">
+    <h2>Вход и регистрация</h2>
 
-        <form id="loginForm">
-            <input type="email" id="loginEmail" placeholder="Email" required>
-            <input type="password" id="loginPassword" placeholder="Пароль" required>
-            <button type="submit">Войти</button>
-        </form>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required />
+      <input type="password" id="loginPassword" placeholder="Пароль" required />
+      <button type="submit">Войти</button>
+    </form>
 
-        <form id="registerForm">
-            <input type="email" id="registerEmail" placeholder="Email" required>
-            <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
-            <button type="submit">Зарегистрироваться</button>
-        </form>
+    <form id="registerForm">
+      <input type="email" id="registerEmail" placeholder="Email" required />
+      <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required />
+      <button type="submit">Зарегистрироваться</button>
+    </form>
 
-        <p id="authMessage"></p>
-    </section>
+    <p id="authMessage"></p>
+  </section>
 
-    <footer>
-        <p>&copy; 2025. Все права защищены.</p>
-    </footer>
+  <footer>
+    <p>&copy; 2025. Все права защищены.</p>
+  </footer>
 
-    <script src="script.js"></script>
+  <!-- Firebase Auth -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    <!-- Firebase Auth -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
-          from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
+      authDomain: "testik-b6f72.firebaseapp.com",
+      projectId: "testik-b6f72",
+      storageBucket: "testik-b6f72.firebasestorage.app",
+      messagingSenderId: "398523760786",
+      appId: "1:398523760786:web:35ecca7778ebe25564a64b"
+    };
 
-        const firebaseConfig = {
-          apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
-          authDomain: "testik-b6f72.firebaseapp.com",
-          projectId: "testik-b6f72",
-          storageBucket: "testik-b6f72.firebasestorage.app",
-          messagingSenderId: "398523760786",
-          appId: "1:398523760786:web:35ecca7778ebe25564a64b"
-        };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+    function getErrorMessage(error) {
+      switch (error.code) {
+        case 'auth/invalid-credential':
+        case 'auth/wrong-password':
+        case 'auth/user-not-found':
+          return 'ОШИБКА! НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ! ПОПРОБУЙТЕ СНОВА!';
+        case 'auth/email-already-in-use':
+          return 'Этот email уже используется!';
+        case 'auth/invalid-email':
+          return 'Неверный формат email!';
+        case 'auth/weak-password':
+          return 'Пароль слишком слабый! Минимум 6 символов.';
+        case 'auth/missing-password':
+          return 'Введите пароль!';
+        default:
+          return 'Произошла ошибка. Попробуйте позже.';
+      }
+    }
 
-        function getErrorMessage(error) {
-            switch (error.code) {
-                case 'auth/invalid-credential':
-                case 'auth/wrong-password':
-                case 'auth/user-not-found':
-                    return 'ОШИБКА! НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ! ПОПРОБУЙТЕ СНОВА!';
-                case 'auth/email-already-in-use':
-                    return 'Этот email уже используется!';
-                case 'auth/invalid-email':
-                    return 'Неверный формат email!';
-                case 'auth/weak-password':
-                    return 'Пароль слишком слабый! Минимум 6 символов.';
-                case 'auth/missing-password':
-                    return 'Введите пароль!';
-                default:
-                    return 'Произошла ошибка. Попробуйте позже.';
-            }
-        }
+    function showMessage(text) {
+      const el = document.getElementById('authMessage');
+      if (el) el.innerText = text;
+    }
 
-        function showMessage(text) {
-            const el = document.getElementById('authMessage');
-            if (el) el.innerText = text;
-        }
+    document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail')?.value;
+      const password = document.getElementById('loginPassword')?.value;
+      if (!email || !password) return;
 
-        document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail')?.value;
-            const password = document.getElementById('loginPassword')?.value;
-            if (!email || !password) return;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showMessage('✅ Вход выполнен!');
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        showMessage(getErrorMessage(error));
+      }
+    });
 
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                showMessage('✅ Вход выполнен!');
-                window.location.href = 'dashboard.html';
-            } catch (error) {
-                showMessage(getErrorMessage(error));
-            }
-        });
+    document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('registerEmail')?.value;
+      const password = document.getElementById('registerPassword')?.value;
+      if (!email || !password) return;
 
-        document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('registerEmail')?.value;
-            const password = document.getElementById('registerPassword')?.value;
-            if (!email || !password) return;
-
-            try {
-                await createUserWithEmailAndPassword(auth, email, password);
-                showMessage('✅ Регистрация успешна!');
-                window.location.href = 'dashboard.html';
-            } catch (error) {
-                showMessage(getErrorMessage(error));
-            }
-        });
-    </script>
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        showMessage('✅ Регистрация успешна!');
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        showMessage(getErrorMessage(error));
+      }
+    });
+  </script>
 </body>
 </html>
 
                 
+
 
 
 
