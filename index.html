@@ -5,15 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Отступ под фиксированное меню */
+        body {
+            padding-top: 60px;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">Обо мне</a></li>
-            <li><a href="portfolio.html">Портфолио</a></li>
-            <li><a href="contact.html">Контакты</a></li>
-            <li><a href="calculator.html">Калькулятор</a></li>
+
+    <!-- Адаптивная навигация -->
+    <nav style="background: #007bff; padding: 10px 0; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+        <ul style="
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 5px;
+            max-width: 100%;
+        ">
+            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Главная</a></li>
+            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Обо мне</a></li>
+            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Портфолио</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Контакты</a></li>
+            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Калькулятор</a></li>
         </ul>
     </nav>
 
@@ -47,6 +65,7 @@
 
     <script src="script.js"></script>
 
+    <!-- Firebase Auth — БЕЗ ПРОБЕЛОВ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
@@ -88,7 +107,7 @@
             if (el) el.innerText = text;
         }
 
-document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+        document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail')?.value;
             const password = document.getElementById('loginPassword')?.value;
@@ -120,7 +139,9 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     </script>
 </body>
 </html>
+
                 
+
 
 
 
