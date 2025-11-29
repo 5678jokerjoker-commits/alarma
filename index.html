@@ -6,31 +6,181 @@
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Отступ под фиксированное меню — чтобы не сливалось */
+        /* Основной стиль */
         body {
-            padding-top: 70px;
             margin: 0;
+            padding-top: 70px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow-x: hidden;
         }
-        /* Дополнительная защита от слияния */
-        header {
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
 
-    <!-- Адаптивная навигация -->
-    <nav style="
-        background: #007bff;
-        padding: 12px 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        border-bottom: 1px solid #0056b3;
-    ">
-        <ul style="
+        /* Блёстки */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(255,215,0,0.2) 1px, transparent 1px),
+                radial-gradient(circle at 85% 70%, rgba(0,200,255,0.15) 1px, transparent 1px),
+                radial-gradient(circle at 50% 20%, rgba(255,105,180,0.1) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: -1;
+            animation: twinkle 10s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Сияющий заголовок */
+        header h1 {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b, #ff6a88, #ff7e5f);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        /* Неоновая кнопка */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e53);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 107, 107, 0.9);
+            background: linear-gradient(90deg, #ff8e53, #ff6b6b);
+        }
+
+        /* Формы входа/регистрации */
+        #auth-section {
+            background: rgba(25, 25, 45, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 20px auto 60px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        #auth-section h2 {
+            margin-top: 0;
+            color: #ff7e5f;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        #auth-section input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: 1px solid rgba(100, 100, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(30, 30, 50, 0.8);
+            color: white;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        #auth-section input::placeholder {
+            color: #888;
+        }
+
+        #auth-section button {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        #loginForm button {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 118, 255, 0.4);
+        }
+
+        #loginForm button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 118, 255, 0.7);
+        }
+
+        #registerForm button {
+            background: linear-gradient(90deg, #00b09b, #96c93d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 176, 155, 0.4);
+        }
+
+        #registerForm button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 176, 155, 0.7);
+        }
+
+        #authMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 1.5em;
+        }
+
+        /* Навигация */
+        nav {
+            background: #007bff;
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #0056b3;
+        }
+
+        nav ul {
             list-style: none;
             display: flex;
             justify-content: space-around;
@@ -38,38 +188,69 @@
             padding: 0;
             flex-wrap: wrap;
             gap: 5px;
-            max-width: 100%;
-        ">
-            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
-            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
-            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
-            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
-            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
+        }
+
+        nav li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.92rem;
+            padding: 7px 10px;
+            border-radius: 4px;
+        }
+
+        nav li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Футер */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(10, 10, 25, 0.9);
+            color: #bbb;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="calculator.html">Калькулятор</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Привет! Я МУЖИК, имя моё всем известно Костя с большой буквы. — разработчик</h1>
+        <h1>Привет! Я МУЖИК, имя моё всем известно — Костя с большой буквы!</h1>
         <p>Создаю интерактивные веб-проекты на JavaScript</p>
         <a href="portfolio.html" class="btn">Смотреть проекты</a>
     </header>
 
-    <section id="auth-section" style="padding: 20px; max-width: 600px; margin: 30px auto;">
-        <h2 style="text-align: center;">Вход и регистрация</h2>
+    <section id="auth-section">
+        <h2>Вход и регистрация</h2>
 
-        <form id="loginForm" style="margin-bottom: 20px;">
-            <input type="email" id="loginEmail" placeholder="Email" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
-            <input type="password" id="loginPassword" placeholder="Пароль" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
-            <button type="submit" style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer;">Войти</button>
+        <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
         </form>
 
         <form id="registerForm">
-            <input type="email" id="registerEmail" placeholder="Email" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
-            <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required style="width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box;">
-            <button type="submit" style="width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer;">Зарегистрироваться</button>
+            <input type="email" id="registerEmail" placeholder="Email" required>
+            <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
+            <button type="submit">Зарегистрироваться</button>
         </form>
 
-        <p id="authMessage" style="text-align: center; margin-top: 15px; color: red; font-weight: bold;"></p>
+        <p id="authMessage"></p>
     </section>
 
     <footer>
@@ -78,7 +259,7 @@
 
     <script src="script.js"></script>
 
-    <!-- Firebase Auth — БЕЗ ПРОБЕЛОВ -->
+    <!-- Firebase Auth -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
@@ -154,6 +335,7 @@
 </html>
 
                 
+
 
 
 
