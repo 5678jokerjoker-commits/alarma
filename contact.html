@@ -5,20 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Отступ под фиксированное меню */
+        body {
+            padding-top: 70px;
+            margin: 0;
+        }
+        main {
+            padding-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">Обо мне</a></li>
-            <li><a href="portfolio.html">Портфолио</a></li>
-            <li><a href="contact.html">Контакты</a></li>
+
+    <!-- Адаптивная навигация как в index.html -->
+    <nav style="
+        background: #007bff;
+        padding: 12px 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        border-bottom: 1px solid #0056b3;
+    ">
+        <ul style="
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 5px;
+            max-width: 100%;
+        ">
+            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
+            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
+            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
+            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
         </ul>
     </nav>
 
     <main>
         <section id="contact">
-            <h2>Связаться со мной можно через указанную ниже форму.Зполните о себе данные и в разделе сообщение укажите суть обращения</h2>
+            <h2>Форма связи!</h2>
+            <p>Время ответа составляет до 24 часов!</p>
             <form id="contact-form">
                 <input type="text" name="name" placeholder="Ваше имя" required>
                 <input type="email" name="email" placeholder="Email" required>
@@ -33,46 +65,45 @@
     </footer>
 
     <script src="script.js"></script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
-    authDomain: "testik-b6f72.firebaseapp.com",
-    projectId: "testik-b6f72",
-    storageBucket: "testik-b6f72.firebasestorage.app",
-    messagingSenderId: "398523760786",
-    appId: "1:398523760786:web:35ecca7778ebe25564a64b"
-  };
+        const firebaseConfig = {
+            apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
+            authDomain: "testik-b6f72.firebaseapp.com",
+            projectId: "testik-b6f72",
+            storageBucket: "testik-b6f72.firebasestorage.app",
+            messagingSenderId: "398523760786",
+            appId: "1:398523760786:web:35ecca7778ebe25564a64b"
+        };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-  // Обрабатываем форму по её ID: "contact-form"
-  document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+        document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-    // Собираем данные из формы по атрибуту `name`
-    const formData = new FormData(e.target);
-    const name = formData.get('name')?.toString() || '';
-    const email = formData.get('email')?.toString() || '';
-    const message = formData.get('message')?.toString() || '';
+            const formData = new FormData(e.target);
+            const name = formData.get('name')?.toString() || '';
+            const email = formData.get('email')?.toString() || '';
+            const message = formData.get('message')?.toString() || '';
 
-    try {
-      await addDoc(collection(db, 'feedback'), {
-        name,
-        email,
-        message,
-        createdAt: serverTimestamp()
-      });
-      alert('✅ Сообщение отправлено!');
-      e.target.reset(); // очищаем форму
-    } catch (err) {
-      console.error('Ошибка Firebase:', err);
-      alert('❌ Не удалось отправить. Откройте консоль (F12) для деталей.');
-    }
-  });
-</script>
+            try {
+                await addDoc(collection(db, 'feedback'), {
+                    name,
+                    email,
+                    message,
+                    createdAt: serverTimestamp()
+                });
+                alert('✅ Сообщение отправлено!');
+                e.target.reset();
+            } catch (err) {
+                console.error('Ошибка Firebase:', err);
+                alert('❌ Не удалось отправить. Откройте консоль (F12) для деталей.');
+            }
+        });
+    </script>
 </body>
 </html>
+
