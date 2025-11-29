@@ -10,129 +10,124 @@
         body {
             padding-top: 70px;
             margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        /* ——— Неоновая рамка для фото ——— */
-        .neon-frame {
-            width: 250px;
-            height: 250px;
-            margin: 30px auto;
+        /* Секция авторизации */
+        #auth-section {
+            background: rgba(0, 10, 20, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid #0ff;
             border-radius: 12px;
-            position: relative;
-            box-shadow:
-                0 0 8px rgba(0, 100, 255, 0.7),
-                0 0 16px rgba(0, 150, 255, 0.5);
-            animation: glowFrame 2s infinite alternate;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            padding: 25px;
+            max-width: 500px;
+            margin: 30px auto;
         }
 
-        @keyframes glowFrame {
-            to {
-                box-shadow:
-                    0 0 12px rgba(0, 180, 255, 1),
-                    0 0 24px rgba(0, 120, 255, 0.8);
-            }
+        #auth-section h2 {
+            color: #0ff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
         }
 
-        .neon-frame .content {
+        #auth-section input {
             width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(245, 248, 255, 0.4);
-            border-radius: 10px;
-            color: #222;
-            font-size: 16px;
-        }
-
-        /* ——— Неоновые поля ввода ——— */
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 6px 0;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #0ff;
             border-radius: 6px;
-            background: #fff;
+            color: white;
             font-size: 1rem;
-            transition: box-shadow 0.3s ease;
+            box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
-        input[type="email"]:focus,
-        input[type="password"]:focus {
+        #auth-section input::placeholder {
+            color: #66f;
+        }
+
+        #auth-section input:focus {
             outline: none;
-            border-color: transparent;
-            box-shadow:
-                0 0 6px rgba(0, 123, 255, 0.5),
-                0 0 12px rgba(0, 123, 255, 0.3);
+            border-color: #0ff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
         }
 
-        /* ——— Неоновые кнопки ——— */
-        button[type="submit"] {
-            width: 100%;
+        #auth-section button {
+            margin-top: 10px;
             padding: 12px;
             border: none;
             border-radius: 6px;
             font-weight: bold;
-            color: white;
             cursor: pointer;
-            margin-top: 8px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            font-size: 1rem;
+            width: 100%;
         }
 
-        /* Синяя кнопка — вход */
-        #loginForm button {
-            background: #007bff;
-            box-shadow:
-                0 0 6px rgba(0, 123, 255, 0.6),
-                0 0 12px rgba(0, 100, 255, 0.4);
+        #auth-section #loginForm button {
+            background: #00f;
+            color: white;
+            text-shadow: 0 0 8px rgba(0, 0, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+        }
+        #auth-section #loginForm button:hover {
+            background: #00a;
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.8);
         }
 
-        #loginForm button:hover {
-            background: #0069d9;
-            box-shadow:
-                0 0 10px rgba(0, 123, 255, 0.9),
-                0 0 20px rgba(0, 100, 255, 0.7);
+        #auth-section #registerForm button {
+            background: #0f0;
+            color: black;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        #auth-section #registerForm button:hover {
+            background: #0a0;
+            box-shadow: 0 0 20px rgba(0, 200, 0, 0.8);
         }
 
-        /* Зелёная кнопка — регистрация */
-        #registerForm button {
-            background: #28a745;
-            box-shadow:
-                0 0 6px rgba(40, 167, 69, 0.6),
-                0 0 12px rgba(40, 167, 69, 0.4);
-        }
-
-        #registerForm button:hover {
-            background: #218838;
-            box-shadow:
-                0 0 10px rgba(40, 167, 69, 0.9),
-                0 0 20px rgba(40, 167, 69, 0.7);
-        }
-
-        /* Сообщение об ошибке — как у тебя */
         #authMessage {
+            color: #f00;
+            font-weight: bold;
             text-align: center;
             margin-top: 15px;
-            color: #dc3545;
-            font-weight: bold;
-            min-height: 24px;
+            text-shadow: 0 0 6px rgba(255, 0, 0, 0.7);
         }
 
-        /* Навигация и общие стили — без изменений */
-        nav {
-            background: #007bff;
-            padding: 12px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            border-bottom: 1px solid #0056b3;
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 40px;
         }
 
-        nav ul {
+        /* Анимация блика для фото */
+        @keyframes shine {
+            0% { left: -50%; opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 0.7; }
+            100% { left: 150%; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ОРИГИНАЛЬНАЯ НАВИГАЦИЯ — как в твоём первом коде -->
+    <nav style="
+        background: #007bff;
+        padding: 12px 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        border-bottom: 1px solid #0056b3;
+    ">
+        <ul style="
             list-style: none;
             display: flex;
             justify-content: space-around;
@@ -140,44 +135,81 @@
             padding: 0;
             flex-wrap: wrap;
             gap: 5px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.92rem;
-            padding: 7px 10px;
-            border-radius: 4px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Навигация без изменений -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">Обо мне</a></li>
-            <li><a href="portfolio.html">Портфолио</a></li>
-            <li><a href="contact.html">Контакты</a></li>
-            <li><a href="calculator.html">Калькулятор</a></li>
+            max-width: 100%;
+        ">
+            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
+            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
+            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
+            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
         </ul>
     </nav>
 
-    <!-- Неоновая рамка -->
-    <div class="neon-frame">
-        <div class="content">
-            <!-- Сюда фото -->
-            Костя
+    <!-- Заголовок с фото в блестящей рамке -->
+    <header style="text-align: center; padding: 30px 0 20px;">
+        <div class="photo-frame" style="
+            display: inline-block;
+            width: 180px;
+            height: 180px;
+            border: 4px solid #d4af37;
+            border-radius: 12px;
+            box-shadow:
+                0 0 10px #d4af37,
+                0 0 20px #d4af37,
+                0 0 30px rgba(212, 175, 55, 0.6);
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        ">
+            <!-- ⚠️ Замени 'kostya.jpg' на имя своего фото -->
+            <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО" style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            ">
+
+            <!-- Анимированный блик -->
+            <div style="
+                position: absolute;
+                top: -10px;
+                left: -50%;
+                width: 30px;
+                height: 200%;
+                background: rgba(255,255,255,0.6);
+                transform: rotate(30deg);
+                animation: shine 3s infinite;
+            "></div>
         </div>
-    </div>
 
-    <!-- Формы с неоновыми стилями -->
-    <section id="auth-section" style="padding: 20px; max-width: 600px; margin: 30px auto;">
-        <h2 style="text-align: center; margin-bottom: 20px;">Вход и регистрация</h2>
+        <p style="
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #0ff;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+        ">Создаю интерактивные веб-проекты на JavaScript</p>
 
-        <form id="loginForm" style="margin-bottom: 20px;">
+        <a href="portfolio.html" style="
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 24px;
+            background: transparent;
+            color: #0ff;
+            border: 2px solid #0ff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s;
+        ">Смотреть проекты</a>
+    </header>
+
+    <!-- Формы входа и регистрации -->
+    <section id="auth-section">
+        <h2>Вход и регистрация</h2>
+
+        <form id="loginForm">
             <input type="email" id="loginEmail" placeholder="Email" required>
             <input type="password" id="loginPassword" placeholder="Пароль" required>
             <button type="submit">Войти</button>
@@ -196,7 +228,9 @@
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <!-- Firebase — без изменений -->
+    <script src="script.js"></script>
+
+    <!-- Firebase Auth -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
@@ -272,6 +306,7 @@
 </html>
 
                 
+
 
 
 
