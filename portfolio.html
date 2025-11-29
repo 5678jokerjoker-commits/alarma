@@ -8,32 +8,14 @@
 </head>
 <body>
 
-    <!-- Навигация заменена на такую же, как в index.html -->
-    <nav style="
-        background: #007bff;
-        padding: 12px 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        border-bottom: 1px solid #0056b3;
-    ">
-        <ul style="
-            list-style: none;
-            display: flex;
-            justify-content: space-around;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
-            gap: 5px;
-            max-width: 100%;
-        ">
-            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
-            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
-            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
-            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
-            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
+    <!-- ЕДИНСТВЕННОЕ ИЗМЕНЕНИЕ: обновлённая навигация с 5 пунктами -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="calculator.html">Калькулятор</a></li>
         </ul>
     </nav>
 
@@ -52,7 +34,7 @@
         </section>
     </main>
 
-    <!-- Модальное окно -->
+    <!-- Модальное окно — ОСТАВЛЕНО ТОЧНО КАК У ТЕБЯ -->
     <dialog id="modal">
         <h3 id="modal-title"></h3>
         <p id="modal-description"></p>
@@ -68,6 +50,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
