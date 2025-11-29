@@ -6,30 +6,121 @@
     <title>Контакты</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Отступ под фиксированное меню */
+        /* Основной стиль страницы */
         body {
-            padding-top: 70px;
             margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
         }
-        main {
-            padding-top: 10px;
-        }
-    </style>
-</head>
-<body>
 
-    <!-- Адаптивная навигация как в index.html -->
-    <nav style="
-        background: #007bff;
-        padding: 12px 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        border-bottom: 1px solid #0056b3;
-    ">
-        <ul style="
+        /* Отступ под фиксированное меню */
+        main {
+            flex: 1;
+            padding: 70px 20px 60px 20px; /* Верхний отступ для меню + нижний для футера */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Стили для формы */
+        #contact {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        #contact h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        #contact p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        #contact textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        #contact button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        #contact button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Рамка для фотографии/картинки */
+        .photo-frame {
+            width: 100%;
+            height: 300px; /* Можно изменить по желанию */
+            border: 3px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            background-color: #fafafa;
+            color: #999;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        /* Футер */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+            position: relative;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивная навигация */
+        nav {
+            background: #007bff;
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #0056b3;
+        }
+
+        nav ul {
             list-style: none;
             display: flex;
             justify-content: space-around;
@@ -38,12 +129,32 @@
             flex-wrap: wrap;
             gap: 5px;
             max-width: 100%;
-        ">
-            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
-            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
-            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
-            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
-            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
+        }
+
+        nav li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.92rem;
+            padding: 7px 10px;
+            border-radius: 4px;
+        }
+
+        nav li a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Адаптивная навигация -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="calculator.html">Калькулятор</a></li>
         </ul>
     </nav>
 
@@ -58,6 +169,11 @@
                 <button type="submit">Отправить</button>
             </form>
         </section>
+
+        <!-- Прямоугольная рамка для фотографии/картинки -->
+        <div class="photo-frame">
+            Здесь будет ваша фотография или картинка
+        </div>
     </main>
 
     <footer>
@@ -66,8 +182,8 @@
 
     <script src="script.js"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js ";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js ";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
@@ -106,4 +222,5 @@
     </script>
 </body>
 </html>
+
 
