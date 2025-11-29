@@ -6,117 +6,234 @@
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Отступ под фиксированное меню */
+        /* Голографический фон */
         body {
-            padding-top: 70px;
             margin: 0;
-            background: #000;
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
+            padding-top: 75px; /* 60px (меню) + 15px отступ = 75px */
+            background-color: #000;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 255, 204, 0.03),
+                    rgba(0, 255, 204, 0.03) 1px,
+                    transparent 1px,
+                    transparent 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(0, 204, 255, 0.03),
+                    rgba(0, 204, 255, 0.03) 1px,
+                    transparent 1px,
+                    transparent 4px
+                );
+            color: white;
+            font-family: 'Segoe UI', 'Courier New', monospace;
+            min-height: 100vh;
         }
 
-        /* Секция авторизации */
-        #auth-section {
-            background: rgba(0, 10, 20, 0.7);
-            backdrop-filter: blur(5px);
-            border: 1px solid #0ff;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-            padding: 25px;
-            max-width: 500px;
-            margin: 30px auto;
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 16px;
         }
 
-        #auth-section h2 {
-            color: #0ff;
-            margin-bottom: 20px;
+        /* 🔻 Надпись "↓ ВЕБ РАЗРАБОТКА ↓" — начинается через 15px (≈4 мм) от меню */
+        .neon-title {
+            font-size: 1.6rem;
+            font-weight: bold;
             text-align: center;
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+            padding: 0;
+            margin: 15px 0 10px; /* ← Добавлен верхний отступ 15px */
+            letter-spacing: 2px;
+            animation: title-rainbow 4s infinite alternate;
+            text-shadow: 0 0 10px currentColor;
+            width: 100%;
+        }
+
+        @keyframes title-rainbow {
+            0%   { color: #00ffcc; }
+            25%  { color: #00ccff; }
+            50%  { color: #ffff00; }
+            75%  { color: #ff5500; }
+            100% { color: #33ff99; }
+        }
+
+        /* 🟢 Рамка фото */
+        .neon-frame {
+            width: 100%;
+            height: 180px;
+            border: 4px solid #00ffcc;
+            border-radius: 12px;
+            overflow: hidden;
+            animation: neon-pulse 3.5s infinite alternate;
+            box-shadow: 0 0 20px #00ffcc;
+            margin: 0 0 16px;
+        }
+
+        .neon-frame img,
+        .neon-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @keyframes neon-pulse {
+            0%   { border-color: #00ffcc; box-shadow: 0 0 20px #00ffcc, 0 0 35px #00ffcc; }
+            50%  { border-color: #00ccff; box-shadow: 0 0 20px #00ccff, 0 0 35px #00ccff; }
+            100% { border-color: #33ff99; box-shadow: 0 0 20px #33ff99, 0 0 35px #33ff99; }
+        }
+
+        /* 🔴 Кнопка — по центру между фото и формой */
+        .neon-btn {
+            display: inline-block;
+            padding: 10px 28px;
+            background: transparent;
+            color: #ff0000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 12px #ff0000;
+            margin: 24px 0;
+        }
+
+        .neon-btn:hover {
+            background: rgba(255, 0, 0, 0.15);
+            box-shadow: 0 0 20px #ff3333, 0 0 35px #ff3333;
+            color: white;
+        }
+
+        /* 🟡🟡 Форма с двойной рамкой */
+        #auth-section {
+            padding: 20px;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.7);
+            border-radius: 12px;
+            border: 12px solid white; /* ≈3 мм */
+            box-shadow:
+                0 0 0 12px #ffff00, /* ≈3 мм */
+                0 0 20px #ffff00;
+            margin: 24px 0 40px;
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            animation: auth-title-glow 3s infinite alternate;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        @keyframes auth-title-glow {
+            0%   { color: #ffff00; }
+            50%  { color: #ffcc00; }
+            100% { color: #ff9900; }
         }
 
         #auth-section input {
             width: 100%;
             padding: 12px;
             margin: 8px 0;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid #0ff;
+            box-sizing: border-box;
+            background: #111;
+            border: 2px solid #ffff00;
             border-radius: 6px;
             color: white;
-            font-size: 1rem;
-            box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.3);
-        }
-
-        #auth-section input::placeholder {
-            color: #66f;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         #auth-section input:focus {
-            outline: none;
-            border-color: #0ff;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            border-color: #ffcc00;
+            box-shadow: 0 0 10px #ffcc00;
         }
 
         #auth-section button {
-            margin-top: 10px;
+            width: 100%;
             padding: 12px;
             border: none;
             border-radius: 6px;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-            width: 100%;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
 
-        #auth-section #loginForm button {
-            background: #00f;
+        #loginForm button {
+            background: #007bff;
             color: white;
-            text-shadow: 0 0 8px rgba(0, 0, 255, 0.8);
-            box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
-        }
-        #auth-section #loginForm button:hover {
-            background: #00a;
-            box-shadow: 0 0 20px rgba(0, 100, 255, 0.8);
+            box-shadow: 0 0 10px #007bff;
         }
 
-        #auth-section #registerForm button {
-            background: #0f0;
-            color: black;
-            text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        #loginForm button:hover {
+            background: #0056b3;
+            box-shadow: 0 0 15px #007bff;
         }
-        #auth-section #registerForm button:hover {
-            background: #0a0;
-            box-shadow: 0 0 20px rgba(0, 200, 0, 0.8);
+
+        #registerForm button {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 0 10px #28a745;
+        }
+
+        #registerForm button:hover {
+            background: #1e7e34;
+            box-shadow: 0 0 15px #28a745;
         }
 
         #authMessage {
-            color: #f00;
-            font-weight: bold;
             text-align: center;
             margin-top: 15px;
-            text-shadow: 0 0 6px rgba(255, 0, 0, 0.7);
+            font-weight: bold;
+            color: #ff5555;
+            text-shadow: 0 0 8px #ff5555;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            color: #666;
-            margin-top: 40px;
+            margin-top: 20px;
+            color: #aaa;
+            padding-bottom: 20px;
         }
 
-        /* Анимация блика для фото */
-        @keyframes shine {
-            0% { left: -50%; opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 0.7; }
-            100% { left: 150%; opacity: 0; }
+        @media (max-width: 600px) {
+            body {
+                padding-top: 69px; /* 54px меню + 15px = 69px */
+            }
+            .neon-title {
+                font-size: 1.3rem;
+                margin: 15px 0 8px; /* сохранён верхний отступ */
+            }
+            .neon-frame {
+                height: 140px;
+            }
+            .neon-btn {
+                margin: 20px 0;
+                font-size: 1rem;
+                padding: 8px 24px;
+            }
+            .auth-title {
+                font-size: 1.2rem;
+            }
+            #auth-section {
+                border-width: 8px;
+                box-shadow:
+                    0 0 0 8px #ffff00,
+                    0 0 15px #ffff00;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ОРИГИНАЛЬНАЯ НАВИГАЦИЯ — как в твоём первом коде -->
+    <!-- Навигация -->
     <nav style="
         background: #007bff;
         padding: 12px 0;
@@ -145,90 +262,38 @@
         </ul>
     </nav>
 
-    <!-- Заголовок с фото в блестящей рамке -->
-    <header style="text-align: center; padding: 30px 0 20px;">
-        <div class="photo-frame" style="
-            display: inline-block;
-            width: 180px;
-            height: 180px;
-            border: 4px solid #d4af37;
-            border-radius: 12px;
-            box-shadow:
-                0 0 10px #d4af37,
-                0 0 20px #d4af37,
-                0 0 30px rgba(212, 175, 55, 0.6);
-            background: #000;
-            position: relative;
-            overflow: hidden;
-        ">
-            <!-- ⚠️ Замени 'kostya.jpg' на имя своего фото -->
-            <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО" style="
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-            ">
-
-            <!-- Анимированный блик -->
-            <div style="
-                position: absolute;
-                top: -10px;
-                left: -50%;
-                width: 30px;
-                height: 200%;
-                background: rgba(255,255,255,0.6);
-                transform: rotate(30deg);
-                animation: shine 3s infinite;
-            "></div>
+    <div class="main-content">
+        <div class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</div>
+        <div class="neon-frame">
+            <img src="photo.jpg" alt="Костя">
+            <!--
+            <video autoplay muted loop playsinline>
+                <source src="video.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+            -->
         </div>
+        <a href="portfolio.html" class="neon-btn">Смотреть проекты</a>
+    </div>
 
-        <p style="
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: #0ff;
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
-        ">Создаю интерактивные веб-проекты на JavaScript</p>
-
-        <a href="portfolio.html" style="
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 24px;
-            background: transparent;
-            color: #0ff;
-            border: 2px solid #0ff;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            transition: all 0.3s;
-        ">Смотреть проекты</a>
-    </header>
-
-    <!-- Формы входа и регистрации -->
     <section id="auth-section">
-        <h2>Вход и регистрация</h2>
-
+        <div class="auth-title">Вход и регистрация</div>
         <form id="loginForm">
             <input type="email" id="loginEmail" placeholder="Email" required>
             <input type="password" id="loginPassword" placeholder="Пароль" required>
             <button type="submit">Войти</button>
         </form>
-
         <form id="registerForm">
             <input type="email" id="registerEmail" placeholder="Email" required>
             <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
             <button type="submit">Зарегистрироваться</button>
         </form>
-
         <p id="authMessage"></p>
     </section>
 
     <footer>
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
-
-    <script src="script.js"></script>
 
     <!-- Firebase Auth -->
     <script type="module">
@@ -237,12 +302,12 @@
           from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         const firebaseConfig = {
-          apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
-          authDomain: "testik-b6f72.firebaseapp.com",
-          projectId: "testik-b6f72",
-          storageBucket: "testik-b6f72.firebasestorage.app",
-          messagingSenderId: "398523760786",
-          appId: "1:398523760786:web:35ecca7778ebe25564a64b"
+            apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
+            authDomain: "testik-b6f72.firebaseapp.com",
+            projectId: "testik-b6f72",
+            storageBucket: "testik-b6f72.firebasestorage.app",
+            messagingSenderId: "398523760786",
+            appId: "1:398523760786:web:35ecca7778ebe25564a64b"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -302,10 +367,13 @@
             }
         });
     </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
                 
+
 
 
 
