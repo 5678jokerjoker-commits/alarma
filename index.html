@@ -6,17 +6,30 @@
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Отступ под фиксированное меню */
+        /* Отступ под фиксированное меню — чтобы не сливалось */
         body {
-            padding-top: 60px;
+            padding-top: 70px;
             margin: 0;
+        }
+        /* Дополнительная защита от слияния */
+        header {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
     <!-- Адаптивная навигация -->
-    <nav style="background: #007bff; padding: 10px 0; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">
+    <nav style="
+        background: #007bff;
+        padding: 12px 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        border-bottom: 1px solid #0056b3;
+    ">
         <ul style="
             list-style: none;
             display: flex;
@@ -27,11 +40,11 @@
             gap: 5px;
             max-width: 100%;
         ">
-            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Главная</a></li>
-            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Обо мне</a></li>
-            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Портфолио</a></li>
-            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Контакты</a></li>
-            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; padding: 8px 12px; border-radius: 5px;">Калькулятор</a></li>
+            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
+            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
+            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
+            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
         </ul>
     </nav>
 
@@ -141,6 +154,7 @@
 </html>
 
                 
+
 
 
 
