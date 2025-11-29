@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Отступ под фиксированное меню */
+        body {
+            padding-top: 70px;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            width: 100%;
+            max-width: 360px;
+            margin: 24px auto 0;
+            padding: 0 16px;
+            text-align: center;
+        }
+
+        /* Кнопка "Оплатить" */
+        .pay-button {
+            background: #fd7e14;
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(253, 126, 20, 0.4);
+            transition: all 0.25s ease;
+            width: 100%;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+
+        .pay-button:hover {
+            background: #e96b02;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(253, 126, 20, 0.6);
+        }
+
+        .pay-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(253, 126, 20, 0.5);
+        }
+
+        /* Переливающийся заголовок */
+        h2 {
+            margin: 0 0 20px 0;
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg,
+                #ff416c,
+                #ff4b2b,
+                #00c9ff,
+                #92fe9d,
+                #ff416c
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+            animation: gradientShift 4s ease infinite;
+            letter-spacing: -0.5px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Калькулятор */
+        .calculator {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            padding: 18px;
+            border: 1px solid rgba(0, 123, 255, 0.12);
+            margin-bottom: 24px;
+        }
+
+        .display {
+            width: 100%;
+            height: 60px;
+            font-size: 1.8rem;
+            text-align: right;
+            padding: 0 16px;
+            border: none;
+            border-radius: 10px;
+            background: #f8f9fa;
+            color: #212529;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+            margin-bottom: 16px;
+            outline: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .buttons button {
+            height: 56px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            background: #f1f3f5;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+        }
+
+        .buttons button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            background: #e9ecef;
+        }
+
+        .operator { background: #007bff; color: white; }
+        .operator:hover { background: #0069d9; }
+
+        .equals { background: #28a745; color: white; }
+        .equals:hover { background: #218838; }
+
+        .clear, .backspace, .sign { background: #dc3545; color: white; }
+        .clear:hover, .backspace:hover, .sign:hover { background: #c82333; }
+
+        /* Фото — теперь настоящее */
+        .user-photo {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border: 2px solid #e9ecef;
+        }
+
+        /* Модальное окно */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 26px;
+            border-radius: 18px;
+            text-align: center;
+            max-width: 320px;
+            width: 90%;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 12px;
+            color: #e74c3c;
+            font-size: 1.4rem;
+        }
+
+        .modal-content p {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .modal-close {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .modal-close:hover {
+            background: #5a6268;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 380px) {
+            main { margin-top: 20px; }
+            .buttons button { height: 50px; font-size: 1.15rem; }
+            .display { height: 54px; font-size: 1.6rem; }
+            .pay-button { padding: 14px 20px; font-size: 1.15rem; }
+            h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav style="
+        background: #007bff;
+        padding: 12px 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        border-bottom: 1px solid #0056b3;
+    ">
+        <ul style="
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 5px;
+            max-width: 100%;
+        ">
+            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
+            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
+            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
+            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <button class="pay-button" id="payBtn">Оплатить</button>
+        <h2>Калькулятор</h2>
+
+        <div class="calculator">
+            <input type="text" class="display" id="display" readonly value="0">
+            <div class="buttons">
+                <button class="clear" onclick="clearDisplay()">C</button>
+                <button class="sign" onclick="toggleSign()">±</button>
+                <button class="backspace" onclick="backspace()">⌫</button>
+                <button class="operator" onclick="appendToDisplay('/')">÷</button>
+
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button class="operator" onclick="appendToDisplay('*')">×</button>
+
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button class="operator" onclick="appendToDisplay('-')">−</button>
+
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button class="operator" onclick="appendToDisplay('+')">+</button>
+
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button class="equals" onclick="calculate()" style="grid-column: span 2;">=</button>
+            </div>
+        </div>
+
+        <!-- ТВОЁ ФОТО -->
+        <img src="https://github.com/user-attachments/assets/f81b51d4-2e9e-4484-be6b-36ce3b3f3cde" alt="Foto" class="user-photo">
+    </main>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <h3>Технические работы</h3>
+            <p>Способы оплаты временно отключены</p>
+            <button class="modal-close" id="closeModal">Закрыть</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const payBtn = document.getElementById('payBtn');
+        const closeBtn = document.getElementById('closeModal');
+
+        payBtn?.addEventListener('click', () => modal.classList.add('active'));
+        closeBtn?.addEventListener('click', () => modal.classList.remove('active'));
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        let currentInput = '0';
+        let needsReset = false;
+        const display = document.getElementById('display');
+
+        function updateDisplay() {
+            const maxLength = 14;
+            display.value = currentInput.length > maxLength
+                ? currentInput.slice(0, maxLength - 3) + '...'
+                : currentInput;
+        }
+
+        function appendToDisplay(value) {
+            if (needsReset) { currentInput = '0'; needsReset = false; }
+            if (currentInput === '0' && value !== '.') currentInput = value;
+            else {
+                const last = currentInput.slice(-1);
+                const ops = ['+', '-', '*', '/'];
+                if (ops.includes(last) && ops.includes(value)) {
+                    currentInput = currentInput.slice(0, -1) + value;
+                } else {
+                    currentInput += value;
+                }
+            }
+            updateDisplay();
+        }
+
+        function clearDisplay() { currentInput = '0'; needsReset = false; updateDisplay(); }
+
+        function backspace() {
+            if (currentInput.length === 1 || (currentInput.length === 2 && currentInput.startsWith('-'))) {
+                currentInput = '0';
+            } else {
+                currentInput = currentInput.slice(0, -1);
+            }
+            updateDisplay();
+        }
+
+        function toggleSign() {
+            if (currentInput !== '0' && currentInput !== 'Ошибка') {
+                currentInput = currentInput.startsWith('-') ? currentInput.slice(1) : '-' + currentInput;
+                updateDisplay();
+            }
+        }
+
+        function calculate() {
+            if (currentInput === 'Ошибка') return;
+            try {
+                let expr = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
+                const last = expr.slice(-1);
+                if (['+', '-', '*', '/'].includes(last)) expr = expr.slice(0, -1);
+                if (!expr) currentInput = '0';
+                else {
+                    const result = Function('"use strict"; return (' + expr + ')')();
+                    currentInput = Number.isFinite(result) ? String(result) : 'Ошибка';
+                }
+                needsReset = true;
+            } catch {
+                currentInput = 'Ошибка';
+                needsReset = true;
+            }
+            updateDisplay();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (/[0-9]/.test(e.key)) appendToDisplay(e.key);
+            else if (e.key === '.') appendToDisplay('.');
+            else if (['+', '-', '*', '/'].includes(e.key)) appendToDisplay(e.key);
+            else if (e.key === 'Enter' || e.key === '=') calculate();
+            else if (e.key === 'Escape') clearDisplay();
+            else if (e.key === 'Backspace') backspace();
+        });
+    </script>
+</body>
+</html>
