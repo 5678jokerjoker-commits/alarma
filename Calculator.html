@@ -144,7 +144,7 @@
         .clear, .backspace, .sign { background: #dc3545; color: white; }
         .clear:hover, .backspace:hover, .sign:hover { background: #c82333; }
 
-        /* Фото — теперь настоящее */
+        /* Фото */
         .user-photo {
             width: 100%;
             height: 160px;
@@ -233,7 +233,7 @@
 </head>
 <body>
 
-    <!-- Навигация -->
+    <!-- 🔁 ТОЧНАЯ КОПИЯ НАВИГАЦИИ ИЗ ТВОЕГО index.html -->
     <nav style="
         background: #007bff;
         padding: 12px 0;
@@ -296,7 +296,7 @@
         </div>
 
         <!-- ТВОЁ ФОТО -->
-        <img src="https://github.com/user-attachments/assets/f81b51d4-2e9e-4484-be6b-36ce3b3f3cde" alt="Foto" class="user-photo">
+        <img src="assets/photo.jpg" alt="Костя" class="user-photo">
     </main>
 
     <!-- Модальное окно -->
@@ -308,11 +308,13 @@
         </div>
     </div>
 
+    <!-- 🔁 ТОЧНАЯ КОПИЯ ФУТЕРА -->
     <footer>
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
     <script>
+        // Модальное окно
         const modal = document.getElementById('modal');
         const payBtn = document.getElementById('payBtn');
         const closeBtn = document.getElementById('closeModal');
@@ -323,6 +325,7 @@
             if (e.target === modal) modal.classList.remove('active');
         });
 
+        // Калькулятор
         let currentInput = '0';
         let needsReset = false;
         const display = document.getElementById('display');
