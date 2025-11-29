@@ -6,109 +6,137 @@
     <title>Контакты</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Основной стиль страницы */
+        /* Общая база */
         body {
             margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
+            padding-top: 70px;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            background-color: #f5f5f5;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Отступ под фиксированное меню */
+        /* Блёстки на фоне */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.07) 1px, transparent 1px),
+                radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: -1;
+            animation: twinkle 8s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
         main {
-            flex: 1;
-            padding: 70px 20px 60px 20px; /* Верхний отступ для меню + нижний для футера */
-            max-width: 800px;
+            padding: 20px 15px 80px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Стили для формы */
         #contact {
-            background: white;
+            background: rgba(25, 25, 45, 0.7);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Сияющий заголовок */
         #contact h2 {
-            color: #333;
+            font-size: 2.2rem;
             margin-top: 0;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b, #ff7e5f, #ff6a88, #ff7e5f);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 3s ease-in-out infinite;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         #contact p {
-            color: #666;
-            margin-bottom: 20px;
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
         }
 
         #contact input,
         #contact textarea {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 14px;
+            margin-bottom: 18px;
+            background: rgba(30, 30, 50, 0.8);
+            border: 1px solid rgba(100, 100, 255, 0.3);
+            border-radius: 10px;
+            color: white;
             font-size: 1rem;
             box-sizing: border-box;
         }
 
+        #contact input::placeholder,
+        #contact textarea::placeholder {
+            color: #888;
+        }
+
         #contact textarea {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
         }
 
         #contact button {
-            background-color: #007bff;
-            color: white;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #ff6b6b, #ff8e53);
             border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
+            border-radius: 10px;
+            color: white;
             font-weight: bold;
-            transition: background-color 0.3s;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
         }
 
         #contact button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Рамка для фотографии/картинки */
-        .photo-frame {
-            width: 100%;
-            height: 300px; /* Можно изменить по желанию */
-            border: 3px dashed #ccc;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px 0;
-            background-color: #fafafa;
-            color: #999;
-            font-size: 1.2rem;
-            text-align: center;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.7);
+            background: linear-gradient(90deg, #ff8e53, #ff6b6b);
         }
 
         /* Футер */
         footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            width: 100%;
-            box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
-            position: relative;
+            position: fixed;
             bottom: 0;
-        }
-
-        footer p {
-            margin: 0;
+            width: 100%;
+            background: rgba(10, 10, 25, 0.9);
+            color: #bbb;
+            text-align: center;
+            padding: 10px 0;
             font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Адаптивная навигация */
+        /* Навигация — оставляем как есть, но убираем инлайн-стили */
         nav {
             background: #007bff;
             padding: 12px 0;
@@ -128,7 +156,6 @@
             padding: 0;
             flex-wrap: wrap;
             gap: 5px;
-            max-width: 100%;
         }
 
         nav li a {
@@ -141,13 +168,12 @@
         }
 
         nav li a:hover {
-            background-color: #0056b3;
+            background: rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
 <body>
 
-    <!-- Адаптивная навигация -->
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
@@ -169,11 +195,6 @@
                 <button type="submit">Отправить</button>
             </form>
         </section>
-
-        <!-- Прямоугольная рамка для фотографии/картинки -->
-        <div class="photo-frame">
-            Здесь будет ваша фотография или картинка
-        </div>
     </main>
 
     <footer>
@@ -182,8 +203,8 @@
 
     <script src="script.js"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js ";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js ";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
@@ -222,5 +243,6 @@
     </script>
 </body>
 </html>
+
 
 
