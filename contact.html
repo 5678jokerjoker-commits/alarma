@@ -136,7 +136,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Навигация — оставляем как есть, но убираем инлайн-стили */
+        /* Навигация */
         nav {
             background: #007bff;
             padding: 12px 0;
@@ -201,6 +201,9 @@
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
+    <!-- reCAPTCHA v3 script (твой ключ уже вставлен!) -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfxpBwsAAAAAO0Lct_Vq_fRYzZAsiYbVCmYPn4H"></script>
+
     <script src="script.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
@@ -221,16 +224,21 @@
         document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Получаем reCAPTCHA токен с твоим ключом
+            const recaptchaToken = await grecaptcha.execute('6LfxpBwsAAAAAO0Lct_Vq_fRYzZAsiYbVCmYPn4H', { action: 'contact' });
+
             const formData = new FormData(e.target);
             const name = formData.get('name')?.toString() || '';
             const email = formData.get('email')?.toString() || '';
             const message = formData.get('message')?.toString() || '';
 
             try {
+                // Сохраняем данные + токен (хотя без сервера проверка не идёт)
                 await addDoc(collection(db, 'feedback'), {
                     name,
                     email,
                     message,
+                    recaptchaToken,
                     timestamp: serverTimestamp()
                 });
                 alert('✅ Сообщение отправлено!');
