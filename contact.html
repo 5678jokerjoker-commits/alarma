@@ -6,8 +6,6 @@
     <title>Контакты</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ... твой CSS без изменений ... */
-        /* (я оставил его без изменений, как у тебя) */
         body {
             margin: 0;
             padding-top: 70px;
@@ -198,12 +196,10 @@
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <script src="script.js"></script>
     <script type="module">
-        // Firebase и App Check
+        // 🔥 Firebase — только Firestore, без App Check
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-        import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app-check.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCKcUnzPEilGxOXB2L5QYLr0Kw7fgI_hCY",
@@ -215,31 +211,27 @@
         };
 
         const app = initializeApp(firebaseConfig);
-
-        // 🔑 Инициализация App Check с ТВОИМ ключом (reCAPTCHA v3)
-        if (location.hostname !== "localhost") {
-            initializeAppCheck(app, {
-                provider: new ReCaptchaV3Provider("6LfxpBwsAAAAAO0Lct_Vq_fRYzZAsiYbVCmYPn4H"),
-                isTokenAutoRefreshEnabled: true
-            });
-        }
-
         const db = getFirestore(app);
 
         document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const formData = new FormData(e.target);
-            const name = formData.get('name')?.toString() || '';
-            const email = formData.get('email')?.toString() || '';
-            const message = formData.get('message')?.toString() || '';
+            const name = (formData.get('name') || '').toString().trim();
+            const email = (formData.get('email') || '').toString().trim();
+            const message = (formData.get('message') || '').toString().trim();
+
+            if (!name || !email || !message) {
+                alert('❌ Все поля обязательны.');
+                return;
+            }
 
             try {
                 await addDoc(collection(db, 'feedback'), {
                     name,
                     email,
                     message,
-                    timestamp: serverTimestamp()
+                    timestamp: serverTimestamp() // ← критически важно!
                 });
                 alert('✅ Сообщение отправлено!');
                 e.target.reset();
@@ -251,6 +243,7 @@
     </script>
 </body>
 </html>
+
 
 
 
