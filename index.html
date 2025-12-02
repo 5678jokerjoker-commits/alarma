@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -30,12 +30,12 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding-top: 0; /* будет компенсировано через отступ внутри */
+            padding-top: 0;
         }
 
         .main-wrapper {
             flex: 1;
-            padding-top: 75px; /* 60px меню + 15px отступ */
+            padding-top: 75px; /* Стандартный отступ для 1-строчного меню */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -44,6 +44,7 @@
             margin: 0 auto;
             padding-left: 16px;
             padding-right: 16px;
+            min-height: calc(100vh - 120px); /* Минимальная высота, чтобы не сжиматься */
         }
 
         /* 🔻 Надпись "↓ ВЕБ РАЗРАБОТКА ↓" */
@@ -115,7 +116,7 @@
             color: white;
         }
 
-        /* 🟡🟡 Форма с двойной рамкой */
+        /* 🟡🟡 Форма с двойной рамкой — теперь внутри main-wrapper */
         #auth-section {
             padding: 20px;
             width: 100%;
@@ -205,15 +206,15 @@
             text-align: center;
             color: #aaa;
             padding: 20px 16px;
-            /* Защита от вырезов на iPhone/Android */
             padding-bottom: max(20px, env(safe-area-inset-bottom));
             width: 100%;
             box-sizing: border-box;
         }
 
+        /* 💥 ФИКС: На мобильных, где меню 2 строки — увеличиваем отступ сверху */
         @media (max-width: 600px) {
             .main-wrapper {
-                padding-top: 69px; /* 54px меню + 15px */
+                padding-top: 95px; /* 75px → 95px для 2-строчного меню */
             }
             .neon-title {
                 font-size: 1.3rem;
@@ -235,6 +236,13 @@
                 box-shadow:
                     0 0 0 8px #ffff00,
                     0 0 15px #ffff00;
+            }
+        }
+
+        /* 💥 Дополнительно: Если ширина меньше 400px — ещё больше отступ сверху */
+        @media (max-width: 400px) {
+            .main-wrapper {
+                padding-top: 105px; /* Учитываем высоту 2 строк + небольшой запас */
             }
         }
     </style>
@@ -276,22 +284,23 @@
             <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО">
         </div>
         <a href="portfolio.html" class="neon-btn">Смотреть проекты</a>
-    </div>
 
-    <section id="auth-section">
-        <div class="auth-title">Вход и регистрация</div>
-        <form id="loginForm">
-            <input type="email" id="loginEmail" placeholder="Email" required>
-            <input type="password" id="loginPassword" placeholder="Пароль" required>
-            <button type="submit">Войти</button>
-        </form>
-        <form id="registerForm">
-            <input type="email" id="registerEmail" placeholder="Email" required>
-            <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
-            <button type="submit">Зарегистрироваться</button>
-        </form>
-        <p id="authMessage"></p>
-    </section>
+        <!-- 🎯 Форма теперь внутри main-wrapper — пробел исчез! -->
+        <section id="auth-section">
+            <div class="auth-title">Вход и регистрация</div>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            <form id="registerForm">
+                <input type="email" id="registerEmail" placeholder="Email" required>
+                <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+            <p id="authMessage"></p>
+        </section>
+    </div>
 
     <footer>
         <p>&copy; 2025. Все права защищены.</p>
@@ -372,4 +381,4 @@
 
     <script src="script.js"></script>
 </body>
-    </html>
+</html>
