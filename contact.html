@@ -24,8 +24,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             min-height: 100vh;
-            position: relative;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
+            position: relative;
         }
 
         body::before {
@@ -88,6 +90,7 @@
             max-width: 600px;
             margin: 0 auto;
             width: 100%;
+            flex: 1; /* Растягивает контентную область */
         }
 
         #contact {
@@ -188,9 +191,10 @@
             padding: 0.625rem 0;
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 2rem;
             width: 100%;
             box-sizing: border-box;
+            /* Защита от "вырезов" на iPhone/Android */
+            padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
         }
 
         @media (max-width: 320px) {
@@ -312,5 +316,4 @@
     </script>
 </body>
 </html>
-
 
