@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Остальная логика (портфолио и т.д.)
+    // Остальная логика (портфолио, форма и т.д.)
     if (document.querySelector('#projects-grid')) {
         renderProjects(projects);
 
@@ -26,28 +26,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal');
     const closeModal = document.getElementById('close-modal');
 
-    if (modal && closeModal) {
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const id = card.dataset.id;
-                const project = projects.find(p => p.id == id);
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const id = card.dataset.id;
+            const project = projects.find(p => p.id == id);
 
-                document.getElementById('modal-title').textContent = project.title;
-                document.getElementById('modal-description').textContent = project.description;
-                document.getElementById('modal-image').src = project.image;
+            document.getElementById('modal-title').textContent = project.title;
+            document.getElementById('modal-description').textContent = project.description;
+            document.getElementById('modal-image').src = project.image;
 
-                modal.showModal();
-            });
+            modal.showModal();
         });
+    });
 
-        closeModal.addEventListener('click', () => modal.close());
+    closeModal.addEventListener('click', () => modal.close());
+
+    const form = document.getElementById('contact-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Форма отправлена! Спасибо.');
+            form.reset();
+        });
     }
 });
 
 function renderProjects(projects, filter = 'all') {
     const grid = document.getElementById('projects-grid');
-    if (!grid) return;
-
     grid.innerHTML = '';
 
     const filtered = filter === 'all' ? projects : projects.filter(p => p.tags.includes(filter));
@@ -69,4 +74,3 @@ function setActiveFilter(button) {
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
 }
-
