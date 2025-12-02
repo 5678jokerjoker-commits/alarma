@@ -100,8 +100,8 @@
             resize: vertical;
         }
 
-        /* Стиль для ошибки */
-        #message-error {
+        /* Стили для ошибок */
+        .form-error {
             color: #ff6b6b;
             font-size: 0.95rem;
             min-height: 1.2em;
@@ -194,9 +194,14 @@
             <p>Время ответа составляет до 24 часов!</p>
             <form id="contact-form">
                 <input type="text" name="name" placeholder="Ваше имя" required>
+                <div id="name-error" class="form-error"></div>
+
                 <input type="email" name="email" placeholder="Email" required>
+                <div id="email-error" class="form-error"></div>
+
                 <textarea name="message" placeholder="Сообщение" required></textarea>
-                <div id="message-error"></div>
+                <div id="message-error" class="form-error"></div>
+
                 <button type="submit">Отправить</button>
             </form>
         </section>
@@ -223,6 +228,12 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Функция проверки формата email
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+            return re.test(email);
+        }
+
         document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -231,19 +242,40 @@
             const email = (formData.get('email') || '').toString().trim();
             const message = (formData.get('message') || '').toString().trim();
 
-            const errorEl = document.getElementById('message-error');
-            errorEl.textContent = ''; // очистить старую ошибку
+            // Получаем элементы ошибок
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const messageError = document.getElementById('message-error');
 
-            // 🔍 Проверка длины сообщения (минимум 10 символов)
+            // Очищаем предыдущие ошибки
+            nameError.textContent = '';
+            emailError.textContent = '';
+            messageError.textContent = '';
+
+            let hasError = false;
+
+            // Проверка имени
+            if (!name) {
+                nameError.textContent = 'Поле имени обязательно.';
+                hasError = true;
+            }
+
+            // Проверка email
+            if (!email) {
+                emailError.textContent = 'Поле email обязательно.';
+                hasError = true;
+            } else if (!isValidEmail(email)) {
+                emailError.textContent = 'Введите корректный адрес электронной почты.';
+                hasError = true;
+            }
+
+            // Проверка сообщения
             if (message.length < 10) {
-                errorEl.textContent = 'Сообщение должно содержать 10 букв для отправки.';
-                return;
+                messageError.textContent = 'Сообщение должно содержать 10 букв для отправки.';
+                hasError = true;
             }
 
-            if (!name || !email) {
-                errorEl.textContent = 'Все поля обязательны.';
-                return;
-            }
+            if (hasError) return;
 
             try {
                 await addDoc(collection(db, 'feedback'), {
@@ -254,15 +286,16 @@
                 });
                 alert('✅ Сообщение отправлено!');
                 e.target.reset();
-                errorEl.textContent = ''; // очистить ошибку при успехе
+                // Опционально: очистить ошибки после отправки (уже пустые)
             } catch (err) {
                 console.error('Ошибка Firebase:', err);
-                errorEl.textContent = 'Не удалось отправить. Попробуйте позже.';
+                messageError.textContent = 'Не удалось отправить. Попробуйте позже.';
             }
         });
     </script>
 </body>
 </html>
+
 
 
 
