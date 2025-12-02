@@ -81,7 +81,7 @@
         #contact textarea {
             width: 100%;
             padding: 14px;
-            margin-bottom: 18px;
+            margin-bottom: 10px;
             background: rgba(30, 30, 50, 0.8);
             border: 1px solid rgba(100, 100, 255, 0.3);
             border-radius: 10px;
@@ -98,6 +98,15 @@
         #contact textarea {
             min-height: 120px;
             resize: vertical;
+        }
+
+        /* Стиль для ошибки */
+        #message-error {
+            color: #ff6b6b;
+            font-size: 0.95rem;
+            min-height: 1.2em;
+            margin-bottom: 18px;
+            text-align: left;
         }
 
         #contact button {
@@ -187,6 +196,7 @@
                 <input type="text" name="name" placeholder="Ваше имя" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <textarea name="message" placeholder="Сообщение" required></textarea>
+                <div id="message-error"></div>
                 <button type="submit">Отправить</button>
             </form>
         </section>
@@ -221,8 +231,17 @@
             const email = (formData.get('email') || '').toString().trim();
             const message = (formData.get('message') || '').toString().trim();
 
-            if (!name || !email || !message) {
-                alert('❌ Все поля обязательны.');
+            const errorEl = document.getElementById('message-error');
+            errorEl.textContent = ''; // очистить старую ошибку
+
+            // 🔍 Проверка длины сообщения (минимум 10 символов)
+            if (message.length < 10) {
+                errorEl.textContent = 'Сообщение должно содержать 10 букв для отправки.';
+                return;
+            }
+
+            if (!name || !email) {
+                errorEl.textContent = 'Все поля обязательны.';
                 return;
             }
 
@@ -231,18 +250,20 @@
                     name,
                     email,
                     message,
-                    timestamp: serverTimestamp() // ← критически важно!
+                    timestamp: serverTimestamp()
                 });
                 alert('✅ Сообщение отправлено!');
                 e.target.reset();
+                errorEl.textContent = ''; // очистить ошибку при успехе
             } catch (err) {
                 console.error('Ошибка Firebase:', err);
-                alert('❌ Не удалось отправить. Проверьте консоль (F12).');
+                errorEl.textContent = 'Не удалось отправить. Попробуйте позже.';
             }
         });
     </script>
 </body>
 </html>
+
 
 
 
