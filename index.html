@@ -3,37 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Голографический фон */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            background-color: #000;
-            background-image:
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 255, 204, 0.03),
-                    rgba(0, 255, 204, 0.03) 1px,
-                    transparent 1px,
-                    transparent 4px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    rgba(0, 204, 255, 0.03),
-                    rgba(0, 204, 255, 0.03) 1px,
-                    transparent 1px,
-                    transparent 4px
-                );
+            padding: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: white;
-            font-family: 'Segoe UI', 'Courier New', monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* ❌ НЕТ padding-top — он мешает */
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* 💥 НАВИГАЦИЯ — ТОЧНО КАК В contact.html */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.07) 1px, transparent 1px),
+                radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: -1;
+            animation: twinkle 8s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
         nav {
             background: #007bff;
             padding: 0.75rem 0;
@@ -70,15 +85,17 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .main-content {
+        .main-wrapper {
+            flex: 1;
+            padding-top: 1.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 16px;
-            /* ✅ Контент начинается сразу после меню */
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
 
         .neon-title {
@@ -112,7 +129,8 @@
             margin: 0 0 16px;
         }
 
-        .neon-frame img {
+        .neon-frame img,
+        .neon-frame video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -149,13 +167,15 @@
         #auth-section {
             padding: 20px;
             width: 100%;
-            background: rgba(10, 10, 10, 0.7);
+            background: rgba(25, 25, 45, 0.7);
+            backdrop-filter: blur(10px);
             border-radius: 12px;
-            border: 12px solid white;
+            border: 8px solid white;
             box-shadow:
-                0 0 0 12px #ffff00,
-                0 0 20px #ffff00;
+                0 0 0 8px #ffff00,
+                0 0 15px #ffff00;
             margin: 24px 0 40px;
+            max-width: 100%;
         }
 
         .auth-title {
@@ -178,11 +198,13 @@
             padding: 12px;
             margin: 8px 0;
             box-sizing: border-box;
-            background: #111;
+            background: rgba(30, 30, 50, 0.8);
             border: 2px solid #ffff00;
             border-radius: 6px;
             color: white;
             outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: inherit;
         }
 
         #auth-section input:focus {
@@ -197,6 +219,8 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
         #loginForm button {
@@ -227,18 +251,25 @@
             font-weight: bold;
             color: #ff5555;
             text-shadow: 0 0 8px #ff5555;
+            min-height: 1.2em;
         }
 
         footer {
+            background: rgba(10, 10, 25, 0.9);
+            color: #bbb;
             text-align: center;
-            color: #aaa;
-            padding: 20px 16px;
-            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding: 0.625rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             width: 100%;
             box-sizing: border-box;
+            padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
         }
 
         @media (max-width: 600px) {
+            .main-wrapper {
+                padding-top: 1.25rem;
+            }
             .neon-title {
                 font-size: 1.3rem;
                 margin: 15px 0 8px;
@@ -255,17 +286,16 @@
                 font-size: 1.2rem;
             }
             #auth-section {
-                border-width: 8px;
+                border-width: 6px;
                 box-shadow:
-                    0 0 0 8px #ffff00,
-                    0 0 15px #ffff00;
+                    0 0 0 6px #ffff00,
+                    0 0 12px #ffff00;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- 💥 НАВИГАЦИЯ — ТОЧНО КАК В contact.html -->
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
@@ -276,7 +306,7 @@
         </ul>
     </nav>
 
-    <div class="main-content">
+    <div class="main-wrapper">
         <div class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</div>
         <div class="neon-frame">
             <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО">
@@ -303,7 +333,7 @@
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <!-- Firebase Auth (оставлен без изменений) -->
+    <!-- Firebase Auth -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
@@ -333,6 +363,8 @@
                     return 'Неверный формат email!';
                 case 'auth/weak-password':
                     return 'Пароль слишком слабый! Минимум 6 символов.';
+                case 'auth/missing-password':
+                    return 'Введите пароль!';
                 default:
                     return 'Произошла ошибка. Попробуйте позже.';
             }
