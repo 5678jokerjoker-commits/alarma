@@ -19,14 +19,7 @@
         body {
             margin: 0;
             padding: 0;
-            /* Чистый брутальный узор: решётка радиатора автомобиля */
-            background:
-                linear-gradient(135deg, rgba(10, 10, 12, 0.9), rgba(22, 22, 28, 0.85)),
-                url('https://i.imgur.com/5Wd4k8L.png');
-            background-size: cover, 200px 200px;
-            background-attachment: fixed, scroll;
-            background-position: center, top left;
-            background-repeat: no-repeat, repeat;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -92,17 +85,15 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .main-wrapper {
-            padding-top: 1.5rem;
+        .main-content {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding-left: 1rem;
-            padding-right: 1rem;
-            margin-bottom: 24px;
+            padding: 1.5rem 1rem;
         }
 
         .neon-title {
@@ -274,9 +265,8 @@
         }
 
         @media (max-width: 600px) {
-            .main-wrapper {
-                padding-top: 1.25rem;
-                margin-bottom: 20px;
+            .main-content {
+                padding: 1.25rem 1rem;
             }
             .neon-title {
                 font-size: 1.3rem;
@@ -314,35 +304,34 @@
         </ul>
     </nav>
 
-    <div class="main-wrapper">
+    <div class="main-content">
         <div class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</div>
         <div class="neon-frame">
-            <!-- Ваше фото — без пробела -->
             <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО">
         </div>
         <a href="portfolio.html" class="neon-btn">Смотреть проекты</a>
-    </div>
 
-    <section id="auth-section">
-        <div class="auth-title">Вход и регистрация</div>
-        <form id="loginForm">
-            <input type="email" id="loginEmail" placeholder="Email" required>
-            <input type="password" id="loginPassword" placeholder="Пароль" required>
-            <button type="submit">Войти</button>
-        </form>
-        <form id="registerForm">
-            <input type="email" id="registerEmail" placeholder="Email" required>
-            <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
-            <button type="submit">Зарегистрироваться</button>
-        </form>
-        <p id="authMessage"></p>
-    </section>
+        <section id="auth-section">
+            <div class="auth-title">Вход и регистрация</div>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            <form id="registerForm">
+                <input type="email" id="registerEmail" placeholder="Email" required>
+                <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+            <p id="authMessage"></p>
+        </section>
+    </div>
 
     <footer>
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <!-- Firebase Auth (без изменений) -->
+    <!-- Firebase Auth -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
