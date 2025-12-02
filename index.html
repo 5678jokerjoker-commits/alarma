@@ -2,14 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* Голографический фон */
         body {
             margin: 0;
-            padding-top: 75px; /* 60px (меню) + 15px отступ = 75px */
             background-color: #000;
             background-image:
                 repeating-linear-gradient(
@@ -29,25 +28,31 @@
             color: white;
             font-family: 'Segoe UI', 'Courier New', monospace;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 0; /* будет компенсировано через отступ внутри */
         }
 
-        .main-content {
+        .main-wrapper {
+            flex: 1;
+            padding-top: 75px; /* 60px меню + 15px отступ */
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 16px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
-        /* 🔻 Надпись "↓ ВЕБ РАЗРАБОТКА ↓" — начинается через 15px (≈4 мм) от меню */
+        /* 🔻 Надпись "↓ ВЕБ РАЗРАБОТКА ↓" */
         .neon-title {
             font-size: 1.6rem;
             font-weight: bold;
             text-align: center;
             padding: 0;
-            margin: 15px 0 10px; /* ← Добавлен верхний отступ 15px */
+            margin: 15px 0 10px;
             letter-spacing: 2px;
             animation: title-rainbow 4s infinite alternate;
             text-shadow: 0 0 10px currentColor;
@@ -88,7 +93,7 @@
             100% { border-color: #33ff99; box-shadow: 0 0 20px #33ff99, 0 0 35px #33ff99; }
         }
 
-        /* 🔴 Кнопка — по центру между фото и формой */
+        /* 🔴 Кнопка */
         .neon-btn {
             display: inline-block;
             padding: 10px 28px;
@@ -116,9 +121,9 @@
             width: 100%;
             background: rgba(10, 10, 10, 0.7);
             border-radius: 12px;
-            border: 12px solid white; /* ≈3 мм */
+            border: 12px solid white;
             box-shadow:
-                0 0 0 12px #ffff00, /* ≈3 мм */
+                0 0 0 12px #ffff00,
                 0 0 20px #ffff00;
             margin: 24px 0 40px;
         }
@@ -198,18 +203,21 @@
 
         footer {
             text-align: center;
-            margin-top: 20px;
             color: #aaa;
-            padding-bottom: 20px;
+            padding: 20px 16px;
+            /* Защита от вырезов на iPhone/Android */
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            width: 100%;
+            box-sizing: border-box;
         }
 
         @media (max-width: 600px) {
-            body {
-                padding-top: 69px; /* 54px меню + 15px = 69px */
+            .main-wrapper {
+                padding-top: 69px; /* 54px меню + 15px */
             }
             .neon-title {
                 font-size: 1.3rem;
-                margin: 15px 0 8px; /* сохранён верхний отступ */
+                margin: 15px 0 8px;
             }
             .neon-frame {
                 height: 140px;
@@ -262,16 +270,10 @@
         </ul>
     </nav>
 
-    <div class="main-content">
+    <div class="main-wrapper">
         <div class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</div>
         <div class="neon-frame">
             <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО">
-            <!--
-            <video autoplay muted loop playsinline>
-                <source src="video.mp4" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
-            -->
         </div>
         <a href="portfolio.html" class="neon-btn">Смотреть проекты</a>
     </div>
@@ -370,19 +372,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
-
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </html>
