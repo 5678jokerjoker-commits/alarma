@@ -69,3 +69,4 @@ function setActiveFilter(button) {
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
 }
+
