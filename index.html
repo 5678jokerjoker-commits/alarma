@@ -30,15 +30,14 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding-top: 0;
-            overflow-x: hidden;
+            /* ❌ НЕТ padding-top — он мешает */
         }
 
-        /* 💥 СТИЛИ НАВИГАЦИИ — КАК В КОНТАКТАХ */
+        /* 💥 НАВИГАЦИЯ — ТОЧНО КАК В contact.html */
         nav {
             background: #007bff;
             padding: 0.75rem 0;
-            position: fixed;
+            position: sticky;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -71,20 +70,17 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .main-wrapper {
-            flex: 1;
-            padding-top: 75px; /* отступ под меню */
+        .main-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding-left: 16px;
-            padding-right: 16px;
+            padding: 0 16px;
+            /* ✅ Контент начинается сразу после меню */
         }
 
-        /* 🔻 Надпись "↓ ВЕБ РАЗРАБОТКА ↓" */
         .neon-title {
             font-size: 1.6rem;
             font-weight: bold;
@@ -105,7 +101,6 @@
             100% { color: #33ff99; }
         }
 
-        /* 🟢 Рамка фото */
         .neon-frame {
             width: 100%;
             height: 180px;
@@ -130,7 +125,6 @@
             100% { border-color: #33ff99; box-shadow: 0 0 20px #33ff99, 0 0 35px #33ff99; }
         }
 
-        /* 🔴 Кнопка */
         .neon-btn {
             display: inline-block;
             padding: 10px 28px;
@@ -152,7 +146,6 @@
             color: white;
         }
 
-        /* 🟡🟡 Форма авторизации */
         #auth-section {
             padding: 20px;
             width: 100%;
@@ -245,11 +238,7 @@
             box-sizing: border-box;
         }
 
-        /* 💥 Адаптация под мобильные — как в контактах */
         @media (max-width: 600px) {
-            .main-wrapper {
-                padding-top: 69px; /* 54px (меню) + 15px */
-            }
             .neon-title {
                 font-size: 1.3rem;
                 margin: 15px 0 8px;
@@ -276,7 +265,7 @@
 </head>
 <body>
 
-    <!-- НАВИГАЦИЯ — ТОЧНО КАК В КОНТАКТАХ (без инлайновых стилей!) -->
+    <!-- 💥 НАВИГАЦИЯ — ТОЧНО КАК В contact.html -->
     <nav>
         <ul>
             <li><a href="index.html">Главная</a></li>
@@ -287,34 +276,34 @@
         </ul>
     </nav>
 
-    <div class="main-wrapper">
+    <div class="main-content">
         <div class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</div>
         <div class="neon-frame">
             <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО">
         </div>
         <a href="portfolio.html" class="neon-btn">Смотреть проекты</a>
-
-        <section id="auth-section">
-            <div class="auth-title">Вход и регистрация</div>
-            <form id="loginForm">
-                <input type="email" id="loginEmail" placeholder="Email" required>
-                <input type="password" id="loginPassword" placeholder="Пароль" required>
-                <button type="submit">Войти</button>
-            </form>
-            <form id="registerForm">
-                <input type="email" id="registerEmail" placeholder="Email" required>
-                <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
-                <button type="submit">Зарегистрироваться</button>
-            </form>
-            <p id="authMessage"></p>
-        </section>
     </div>
+
+    <section id="auth-section">
+        <div class="auth-title">Вход и регистрация</div>
+        <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+        </form>
+        <form id="registerForm">
+            <input type="email" id="registerEmail" placeholder="Email" required>
+            <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <p id="authMessage"></p>
+    </section>
 
     <footer>
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <!-- Firebase Auth -->
+    <!-- Firebase Auth (оставлен без изменений) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
